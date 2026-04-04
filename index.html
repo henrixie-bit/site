@@ -80,6 +80,7 @@ body{
   padding-left:var(--content-pad);
   padding-right:var(--content-pad);
   width:100%;
+  box-sizing:border-box;
 }
 
 /* ══ NAV ══ */
@@ -161,6 +162,7 @@ body.life .mf-btn.on{background:var(--float-bg);}
   min-height:100vh;
   padding-top:60px;
   transition:background .7s;
+  overflow-x:hidden;
 }
 
 /* ══ HERO GRID ══ */
@@ -173,7 +175,7 @@ body.life .mf-btn.on{background:var(--float-bg);}
   padding-right:64px;
   min-height:calc(100vh - 60px);
   display:grid;
-  grid-template-columns:50% 50%;
+  grid-template-columns:1fr 1fr;
   gap:0;
   align-items:center;
   box-sizing:border-box;
@@ -478,46 +480,42 @@ img.char-img {
 .life-headline em{color:var(--accent);font-style:italic;transition:color .7s;}
 .life-body{font-size:15px;line-height:1.8;color:var(--mid);max-width:560px;margin-bottom:30px;}
 
-/* ══ LIFE — My World ══ */
+/* ══ LIFE — My World (Map) ══ */
 .world-sec{padding:64px 0;}
 .world-title-row{margin-bottom:8px;}
 .world-subtitle{
   font-family:var(--font-mono);font-style:italic;font-size:9px;
-  letter-spacing:.08em;color:var(--mid);margin-bottom:32px;
+  letter-spacing:.08em;color:var(--mid);margin-bottom:24px;
 }
-.photo-board{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-  background:var(--bg2);padding:32px;border-radius:10px;
-  transition:background .7s;
-}
-.photo-card{
+.map-wrap{
   background:var(--card-bg);border:1px solid var(--card-border);
-  border-radius:4px;padding:10px 10px 28px;
-  position:relative;
-  transition:transform .35s,background .7s;
+  border-radius:14px;padding:32px;position:relative;
+  transition:background .7s,border-color .7s;overflow:hidden;
 }
-.photo-card:nth-child(1){transform:rotate(-1.8deg);}
-.photo-card:nth-child(2){transform:rotate(0.8deg);}
-.photo-card:nth-child(3){transform:rotate(-0.6deg);}
-.photo-card:nth-child(4){transform:rotate(1.6deg);}
-.photo-card:hover{transform:rotate(0deg) scale(1.03);}
-.photo-pin{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--accent);margin:0 auto 8px;
-  transition:background .7s;
+.map-wrap svg{width:100%;height:auto;display:block;}
+.map-wrap .land{fill:var(--bg2);stroke:var(--faint);stroke-width:.3;transition:fill .7s,stroke .7s;}
+.map-wrap .visited{fill:var(--accent);opacity:.75;stroke:var(--bg);stroke-width:.4;cursor:pointer;transition:fill .3s,opacity .3s;}
+.map-wrap .visited:hover{opacity:1;filter:brightness(1.1);}
+.map-tooltip{
+  position:absolute;pointer-events:none;
+  background:var(--ink);color:var(--bg);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;
+  padding:6px 14px;border-radius:8px;white-space:nowrap;
+  opacity:0;transition:opacity .2s;z-index:10;
+  transform:translate(-50%,-100%) translateY(-8px);
 }
-.photo-img{
-  width:100%;aspect-ratio:4/3;
-  background:var(--bg2);border-radius:2px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-mono);font-size:8px;color:var(--mid);
-  letter-spacing:.08em;
-  transition:background .7s;
+.map-tooltip.show{opacity:1;}
+.map-stats{
+  display:flex;gap:32px;margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--faint);transition:border-color .7s;
 }
-.photo-label{
-  text-align:center;font-family:var(--font-mono);
-  font-size:8px;letter-spacing:.1em;color:var(--mid);
-  margin-top:8px;text-transform:uppercase;
+.map-stat-n{
+  font-family:var(--font-serif);font-size:32px;font-weight:300;
+  color:var(--accent);line-height:1;transition:color .7s;
+}
+.map-stat-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mid);margin-top:4px;
 }
 
 /* ══ LIFE — Interests ══ */
@@ -536,24 +534,25 @@ img.char-img {
 .int-title{font-size:16px;font-weight:600;margin-bottom:8px;}
 .int-body{font-size:14px;line-height:1.72;color:var(--mid);}
 
-/* ══ LIFE — Reading ══ */
-.reading-grid{
+/* ══ LIFE — Movies ══ */
+.movie-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:1px;
   background:var(--faint);border:1px solid var(--faint);
   border-radius:8px;overflow:hidden;
   transition:background .7s,border-color .7s;
 }
-.book{
+.movie{
   display:flex;gap:16px;padding:22px 24px;
   background:var(--bg);transition:background .7s;
 }
-.book-spine{
+.movie-poster{
   width:5px;flex-shrink:0;border-radius:2px;
 }
-.book-info{display:flex;flex-direction:column;gap:3px;}
-.book-title{font-size:15px;font-weight:600;}
-.book-author{font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;color:var(--mid);}
-.book-note{font-size:13px;line-height:1.65;color:var(--mid);margin-top:4px;}
+.movie-info{display:flex;flex-direction:column;gap:3px;}
+.movie-title{font-size:15px;font-weight:600;}
+.movie-meta{font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;color:var(--mid);}
+.movie-stars{font-size:12px;letter-spacing:2px;margin-top:2px;}
+.movie-note{font-size:13px;line-height:1.65;color:var(--mid);margin-top:4px;font-style:italic;}
 
 /* ══ LIFE — Coffee ══ */
 .coffee-grid{
@@ -675,10 +674,11 @@ img.char-img {
 @media(max-width:860px){
   :root{--content-pad:24px;}
   .hero{grid-template-columns:1fr;gap:0;min-height:auto;padding-left:24px;padding-right:24px;}
-  .hero-left{padding:32px 0 20px;}
-  .hero-right{padding:0;align-items:center;}
-  .char-slot{padding-top:50px;}
-  img.char-img{height:280px;}
+  .hero-left{padding:32px 0 20px;padding-right:0;justify-content:center;}
+  .hero-right{padding:0;align-items:center;justify-content:center;}
+  .hero-card{max-width:100%;box-sizing:border-box;}
+  .char-slot{padding-top:50px;justify-content:center;}
+  img.char-img{height:280px;max-width:100%;}
   .bubble{font-size:9px;padding:8px 16px;}
 
   .nav-inner{padding-left:24px;padding-right:24px;}
@@ -690,9 +690,9 @@ img.char-img {
   .proj:last-child{border-bottom:none;}
   .skills-grid{grid-template-columns:1fr;}
   .int-grid{grid-template-columns:1fr;}
-  .reading-grid{grid-template-columns:1fr;}
+  .movie-grid{grid-template-columns:1fr;}
   .coffee-grid{grid-template-columns:1fr 1fr;}
-  .photo-board{grid-template-columns:repeat(2,1fr);}
+
   .exp,.edu{grid-template-columns:1fr;gap:6px;}
   .footer{flex-direction:column;align-items:flex-start;}
   .section{padding-top:56px;}
@@ -700,23 +700,25 @@ img.char-img {
 }
 @media(max-width:640px){
   :root{--content-pad:16px;}
-  .hero{padding-left:16px;padding-right:16px;}
-  .hero-card{padding:28px 22px;}
+  .hero{padding-left:16px;padding-right:16px;text-align:center;}
+  .hero-left{align-items:center;}
+  .hero-card{padding:28px 22px;text-align:left;}
   .hero-hey{font-size:clamp(32px,8vw,48px);}
   .hero-intro{font-size:15px;}
   .hero-sub{font-size:13px;}
-  .hero-btns{flex-direction:column;gap:8px;}
+  .hero-btns{flex-direction:column;gap:8px;align-items:stretch;}
   .hero-btns .btn-p,.hero-btns .btn-s{text-align:center;width:100%;box-sizing:border-box;}
-  img.char-img{height:240px;}
-  .char-slot{padding-top:40px;}
+  img.char-img{height:240px;max-width:90vw;}
+  .char-slot{padding-top:40px;justify-content:center;}
   .bubble{font-size:8px;padding:7px 14px;border-radius:16px;}
 
   .nav-inner{padding-left:16px;padding-right:16px;}
   .nav-cta{padding:6px 14px;font-size:11px;}
 
   .coffee-grid{grid-template-columns:1fr;}
-  .photo-board{grid-template-columns:1fr 1fr;padding:20px;gap:14px;}
-  .photo-card{padding:8px 8px 22px;}
+  .map-wrap{padding:20px;}
+  .map-stats{gap:20px;flex-wrap:wrap;}
+  .map-stat-n{font-size:24px;}
 
   .life-intro{padding:48px 0 32px;}
   .life-body{font-size:14px;}
@@ -1073,27 +1075,14 @@ body.life .contact-item{border-color:var(--faint);}
 
   <div class="container world-sec" id="myworld">
     <div class="sec-label world-title-row"><span class="sec-n">✦</span><h2 class="sec-t">My World</h2></div>
-    <div class="world-subtitle">→ 照片会放在这里</div>
-    <div class="photo-board">
-      <div class="photo-card">
-        <div class="photo-pin"></div>
-        <div class="photo-img">PARIS</div>
-        <div class="photo-label">巴黎</div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-pin"></div>
-        <div class="photo-img">SHANGHAI</div>
-        <div class="photo-label">上海</div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-pin"></div>
-        <div class="photo-img">LYON</div>
-        <div class="photo-label">里昂</div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-pin"></div>
-        <div class="photo-img">TRAVEL</div>
-        <div class="photo-label">旅行</div>
+    <div class="world-subtitle">→ Hover / tap a country to see when I first visited</div>
+    <div class="map-wrap">
+      <div class="map-tooltip" id="mapTooltip"></div>
+      <div id="mapContainer"></div>
+      <div class="map-stats">
+        <div><div class="map-stat-n">20</div><div class="map-stat-label">Countries & Regions</div></div>
+        <div><div class="map-stat-n">4</div><div class="map-stat-label">Continents</div></div>
+        <div><div class="map-stat-n">∞</div><div class="map-stat-label">Memories</div></div>
       </div>
     </div>
   </div>
@@ -1123,38 +1112,42 @@ body.life .contact-item{border-color:var(--faint);}
 
   <section class="section" id="reading">
     <div class="container">
-      <div class="sec-label"><span class="sec-n">✦</span><h2 class="sec-t">Currently Reading</h2></div>
-      <div class="reading-grid">
-        <div class="book">
-          <div class="book-spine" style="background:#C8963C;"></div>
-          <div class="book-info">
-            <div class="book-title">【书名一】</div>
-            <div class="book-author">【作者】</div>
-            <div class="book-note">【一句读后感】</div>
+      <div class="sec-label"><span class="sec-n">✦</span><h2 class="sec-t">Recent Watches</h2></div>
+      <div class="movie-grid">
+        <div class="movie">
+          <div class="movie-poster" style="background:#C8963C;"></div>
+          <div class="movie-info">
+            <div class="movie-title">The Brutalist</div>
+            <div class="movie-meta">Brady Corbet · 2024</div>
+            <div class="movie-stars">★★★★★</div>
+            <div class="movie-note">三个半小时的史诗，每一帧都像建筑本身——沉重、精确、不容妥协。Adrien Brody 演出了一种被时代碾过又拒绝倒下的生命力。</div>
           </div>
         </div>
-        <div class="book">
-          <div class="book-spine" style="background:#6A8FA8;"></div>
-          <div class="book-info">
-            <div class="book-title">【书名二】</div>
-            <div class="book-author">【作者】</div>
-            <div class="book-note">【一句读后感】</div>
+        <div class="movie">
+          <div class="movie-poster" style="background:#6A8FA8;"></div>
+          <div class="movie-info">
+            <div class="movie-title">Anora</div>
+            <div class="movie-meta">Sean Baker · 2024</div>
+            <div class="movie-stars">★★★★☆</div>
+            <div class="movie-note">金棕榈实至名归。前半段浪漫喜剧的壳，后半段撕开阶级的真相。Mikey Madison 太生猛了。</div>
           </div>
         </div>
-        <div class="book">
-          <div class="book-spine" style="background:#8F6A7A;"></div>
-          <div class="book-info">
-            <div class="book-title">【书名三】</div>
-            <div class="book-author">【作者】</div>
-            <div class="book-note">【一句读后感】</div>
+        <div class="movie">
+          <div class="movie-poster" style="background:#8F6A7A;"></div>
+          <div class="movie-info">
+            <div class="movie-title">Conclave</div>
+            <div class="movie-meta">Edward Berger · 2024</div>
+            <div class="movie-stars">★★★★☆</div>
+            <div class="movie-note">密室政治惊悚片，Ralph Fiennes 用眼神就能演完一整场权力博弈。结尾反转让人沉默很久。</div>
           </div>
         </div>
-        <div class="book">
-          <div class="book-spine" style="background:#6A8A6A;"></div>
-          <div class="book-info">
-            <div class="book-title">【书名四】</div>
-            <div class="book-author">【作者】</div>
-            <div class="book-note">【一句读后感】</div>
+        <div class="movie">
+          <div class="movie-poster" style="background:#6A8A6A;"></div>
+          <div class="movie-info">
+            <div class="movie-title">Past Lives</div>
+            <div class="movie-meta">Celine Song · 2023</div>
+            <div class="movie-stars">★★★★★</div>
+            <div class="movie-note">看完在电影院坐了很久没走。关于错过、关于因缘、关于那些「如果当初」。最后长椅上的沉默胜过一切台词。</div>
           </div>
         </div>
       </div>
@@ -1262,6 +1255,70 @@ body.life .contact-item{border-color:var(--faint);}
           <div class="cf-note">国内精品咖啡连锁里做得最认真的，创意特调值得试。</div>
         </div>
 
+        <div class="cf-card">
+          <div class="cf-card-top">
+            <div class="cf-name">Fuglen</div>
+            <div class="cf-city">Oslo</div>
+          </div>
+          <div class="cf-divider"></div>
+          <div class="cf-drink">喝了 <span>Filter Coffee / Ethiopian</span>，花香炸裂，干净得像水晶。</div>
+          <div class="cf-rating">
+            <div class="cf-dots">
+              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div>
+            </div>
+            <div class="cf-score">5 / 5</div>
+          </div>
+          <div class="cf-note">北欧轻烘焙的鼻祖之一，白天是咖啡馆晚上变酒吧，复古家具可以直接买走。</div>
+        </div>
+
+        <div class="cf-card">
+          <div class="cf-card-top">
+            <div class="cf-name">Tim Wendelboe</div>
+            <div class="cf-city">Oslo</div>
+          </div>
+          <div class="cf-divider"></div>
+          <div class="cf-drink">喝了 <span>Aeropress / Finca Tamana</span>，甜感惊人，像在喝果汁。</div>
+          <div class="cf-rating">
+            <div class="cf-dots">
+              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div>
+            </div>
+            <div class="cf-score">5 / 5</div>
+          </div>
+          <div class="cf-note">精品咖啡界的教科书级人物开的店，每一杯都是教学示范。朝圣必去。</div>
+        </div>
+
+        <div class="cf-card">
+          <div class="cf-card-top">
+            <div class="cf-name">Drop Coffee</div>
+            <div class="cf-city">Stockholm</div>
+          </div>
+          <div class="cf-divider"></div>
+          <div class="cf-drink">喝了 <span>Pour Over / Kenyan</span>，黑加仑和柑橘调，层次分明。</div>
+          <div class="cf-rating">
+            <div class="cf-dots">
+              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div>
+            </div>
+            <div class="cf-score">5 / 5</div>
+          </div>
+          <div class="cf-note">斯德哥尔摩最好的精品咖啡，没有之一。北欧极简风空间让人专注在咖啡本身。</div>
+        </div>
+
+        <div class="cf-card">
+          <div class="cf-card-top">
+            <div class="cf-name">Coffee Collective</div>
+            <div class="cf-city">Copenhagen</div>
+          </div>
+          <div class="cf-divider"></div>
+          <div class="cf-drink">喝了 <span>Flat White</span>，奶与咖啡融合度极高，温润不腻。</div>
+          <div class="cf-rating">
+            <div class="cf-dots">
+              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div>
+            </div>
+            <div class="cf-score">5 / 5</div>
+          </div>
+          <div class="cf-note">哥本哈根精品咖啡代表，直接贸易模式的先驱。Torvehallerne 市场店氛围最好。</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1287,6 +1344,149 @@ body.life .contact-item{border-color:var(--faint);}
   </div>
 
 </div><!-- /content-life -->
+
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+// ── World Map ──
+(function(){
+  const VISITED = {
+    'China':       '2004',
+    'South Korea': '2012',
+    'Japan':       '2019',
+    'Taiwan':      '2018',
+    'Hong Kong':   '2015',
+    'Macau':       '2015',
+    'Malaysia':    '2017',
+    'Singapore':   '2017',
+    'Australia':   '2019',
+    'United Arab Emirates': '2023',
+    'Norway':      '2024',
+    'Sweden':      '2024',
+    'Denmark':     '2024',
+    'Netherlands': '2024',
+    'Germany':     '2023',
+    'Poland':      '2024',
+    'France':      '2022',
+    'Spain':       '2023',
+    'Portugal':    '2023',
+    'Italy':       '2023'
+  };
+  // Name mapping from Natural Earth to our names
+  const NAME_MAP = {
+    'Korea':'South Korea','Rep. Korea':'South Korea','S. Korea':'South Korea',
+    'Dem. Rep. Korea':'North Korea',
+    'U.A.E.':'United Arab Emirates','UAE':'United Arab Emirates',
+    'United Arab Em.':'United Arab Emirates'
+  };
+
+  const W=960, H=500;
+  const container = document.getElementById('mapContainer');
+  if(!container) return;
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world => {
+      const countries = topojson.feature(world, world.objects.countries);
+
+      // Simple equirectangular projection
+      function project(coords){
+        const x = (coords[0]+180)/360*W;
+        const y = (90-coords[1])/180*H;
+        return [x,y];
+      }
+      function ringToPath(ring){
+        return ring.map((pt,i)=>{
+          const [x,y]=project(pt);
+          return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
+        }).join('')+'Z';
+      }
+      function geomToPath(geom){
+        if(geom.type==='Polygon') return geom.coordinates.map(ringToPath).join('');
+        if(geom.type==='MultiPolygon') return geom.coordinates.map(p=>p.map(ringToPath).join('')).join('');
+        return '';
+      }
+
+      // Country name lookup from Natural Earth IDs
+      // We'll use the built-in properties
+      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('viewBox','0 0 '+W+' '+H);
+      svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+
+      // Try to get country names from properties
+      // world-atlas uses numeric IDs, we need a name mapping
+      const ID_NAMES = {};
+      // Fetch country names
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        .then(()=>{
+          // The features have id property (ISO numeric)
+          // We need to map these. Let's use a separate names file
+          return fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
+        });
+
+      // Alternative: use the 'name' property if available, otherwise use a static map
+      // world-atlas@2 countries have numeric IDs, we need ISO mapping
+      const ISO_NAMES={4:'Afghanistan',8:'Albania',12:'Algeria',24:'Angola',32:'Argentina',36:'Australia',40:'Austria',50:'Bangladesh',56:'Belgium',64:'Bhutan',68:'Bolivia',70:'Bosnia and Herz.',76:'Brazil',100:'Bulgaria',104:'Myanmar',116:'Cambodia',120:'Cameroon',124:'Canada',140:'Central African Rep.',144:'Sri Lanka',148:'Chad',152:'Chile',156:'China',170:'Colombia',178:'Congo',180:'Dem. Rep. Congo',188:'Costa Rica',191:'Croatia',192:'Cuba',196:'Cyprus',203:'Czechia',208:'Denmark',214:'Dominican Rep.',218:'Ecuador',818:'Egypt',222:'El Salvador',226:'Eq. Guinea',232:'Eritrea',233:'Estonia',231:'Ethiopia',246:'Finland',250:'France',266:'Gabon',270:'Gambia',268:'Georgia',276:'Germany',288:'Ghana',300:'Greece',320:'Guatemala',324:'Guinea',328:'Guyana',332:'Haiti',340:'Honduras',348:'Hungary',352:'Iceland',356:'India',360:'Indonesia',364:'Iran',368:'Iraq',372:'Ireland',376:'Israel',380:'Italy',388:'Jamaica',392:'Japan',400:'Jordan',398:'Kazakhstan',404:'Kenya',408:'North Korea',410:'South Korea',414:'Kuwait',417:'Kyrgyzstan',418:'Laos',428:'Latvia',422:'Lebanon',426:'Lesotho',430:'Liberia',434:'Libya',440:'Lithuania',442:'Luxembourg',450:'Madagascar',454:'Malawi',458:'Malaysia',466:'Mali',478:'Mauritania',484:'Mexico',496:'Mongolia',498:'Moldova',504:'Morocco',508:'Mozambique',516:'Namibia',524:'Nepal',528:'Netherlands',540:'New Caledonia',554:'New Zealand',558:'Nicaragua',562:'Niger',566:'Nigeria',578:'Norway',512:'Oman',586:'Pakistan',591:'Panama',598:'Papua New Guinea',600:'Paraguay',604:'Peru',608:'Philippines',616:'Poland',620:'Portugal',634:'Qatar',642:'Romania',643:'Russia',646:'Rwanda',682:'Saudi Arabia',686:'Senegal',694:'Sierra Leone',702:'Singapore',703:'Slovakia',704:'Vietnam',705:'Slovenia',706:'Somalia',710:'South Africa',716:'Zimbabwe',724:'Spain',729:'Sudan',728:'S. Sudan',740:'Suriname',748:'eSwatini',752:'Sweden',756:'Switzerland',760:'Syria',158:'Taiwan',762:'Tajikistan',764:'Thailand',768:'Togo',780:'Trinidad and Tobago',788:'Tunisia',792:'Turkey',795:'Turkmenistan',800:'Uganda',804:'Ukraine',784:'United Arab Emirates',826:'United Kingdom',834:'Tanzania',840:'United States of America',858:'Uruguay',860:'Uzbekistan',862:'Venezuela',887:'Yemen',894:'Zambia',344:'Hong Kong',446:'Macau'};
+
+      countries.features.forEach(f=>{
+        const id = +f.id;
+        const name = ISO_NAMES[id] || '';
+        const mapped = NAME_MAP[name] || name;
+        const d = geomToPath(f.geometry);
+        if(!d) return;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+        path.setAttribute('d', d);
+
+        if(VISITED[mapped]){
+          path.setAttribute('class','visited');
+          path.setAttribute('data-country', mapped);
+          path.setAttribute('data-date', VISITED[mapped]);
+        } else {
+          path.setAttribute('class','land');
+        }
+        svg.appendChild(path);
+      });
+
+      container.appendChild(svg);
+
+      // Tooltip
+      const tooltip = document.getElementById('mapTooltip');
+      svg.addEventListener('mousemove', e=>{
+        const t = e.target;
+        if(t.classList.contains('visited')){
+          const name = t.getAttribute('data-country');
+          const date = t.getAttribute('data-date');
+          tooltip.textContent = name + ' · First visited ' + date;
+          tooltip.classList.add('show');
+          const rect = container.getBoundingClientRect();
+          tooltip.style.left = (e.clientX - rect.left) + 'px';
+          tooltip.style.top = (e.clientY - rect.top) + 'px';
+        } else {
+          tooltip.classList.remove('show');
+        }
+      });
+      svg.addEventListener('mouseleave', ()=> tooltip.classList.remove('show'));
+
+      // Touch support
+      svg.addEventListener('touchstart', e=>{
+        const t = e.target;
+        if(t.classList.contains('visited')){
+          e.preventDefault();
+          const name = t.getAttribute('data-country');
+          const date = t.getAttribute('data-date');
+          tooltip.textContent = name + ' · First visited ' + date;
+          tooltip.classList.add('show');
+          const touch = e.touches[0];
+          const rect = container.getBoundingClientRect();
+          tooltip.style.left = (touch.clientX - rect.left) + 'px';
+          tooltip.style.top = (touch.clientY - rect.top) + 'px';
+          setTimeout(()=> tooltip.classList.remove('show'), 2000);
+        }
+      }, {passive:false});
+    })
+    .catch(e=>{ console.log('Map load error:',e); container.innerHTML='<div style="text-align:center;padding:60px;color:var(--mid);font-family:var(--font-mono);font-size:11px;">🌍 Map loading...</div>'; });
+})();
+</script>
 
 <script>
 // ── Custom cursor ──
@@ -1368,7 +1568,7 @@ function setMode(m) {
   document.getElementById('heroLife').style.display = isLife ? '' : 'none';
   switchChar(isLife);
   const labels = isLife
-    ? [['#myworld','My World'],['#interests','Interests'],['#reading','Reading'],['#thought','Thoughts']]
+    ? [['#myworld','My World'],['#interests','Interests'],['#reading','Watches'],['#thought','Thoughts']]
     : [['#experience','Experience'],['#projects','Projects'],['#education','Education'],['#skills','Skills']];
   ['a1','a2','a3','a4'].forEach((id,i) => {
     const el = document.getElementById(id);
