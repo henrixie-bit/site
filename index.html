@@ -1404,31 +1404,17 @@ body.life .contact-item{border-color:var(--faint);}
 </div><!-- /content-life -->
 
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="https://d3js.org/d3-geo.v2.min.js"></script>
 <script>
-// ── World Map ──
+// ── World Map (d3-geo projection, no horizontal line artifacts) ──
 (function(){
   const VISITED = {
-    'China':       '2004',
-    'South Korea': '2019',
-    'Japan':       '2019',
-    'Taiwan':      '2018',
-    'Hong Kong':   '2015',
-    'Macau':       '2015',
-    'Malaysia':    '2017',
-    'Singapore':   '2017',
-    'Australia':   '2019',
-    'United Arab Emirates': '2025',
-    'Norway':      '2025',
-    'Sweden':      '2025',
-    'Denmark':     '2025',
-    'Netherlands': '2025',
-    'Germany':     '2025',
-    'Poland':      '2025',
-    'France':      '2022',
-    'Spain':       '2025',
-    'Portugal':    '2025',
-    'Italy':       '2025',
-    'Belgium':     '2025'
+    'China':'2004','South Korea':'2019','Japan':'2019','Taiwan':'2018',
+    'Hong Kong':'2015','Macau':'2015','Malaysia':'2017','Singapore':'2017',
+    'Australia':'2019','United Arab Emirates':'2025',
+    'Norway':'2025','Sweden':'2025','Denmark':'2025','Netherlands':'2025',
+    'Germany':'2025','Poland':'2025','France':'2022','Spain':'2025',
+    'Portugal':'2025','Italy':'2025','Belgium':'2025'
   };
   const NAME_MAP = {
     'Korea':'South Korea','Rep. Korea':'South Korea','S. Korea':'South Korea',
@@ -1436,8 +1422,11 @@ body.life .contact-item{border-color:var(--faint);}
     'U.A.E.':'United Arab Emirates','UAE':'United Arab Emirates',
     'United Arab Em.':'United Arab Emirates'
   };
+  const ISO_NAMES={4:'Afghanistan',8:'Albania',12:'Algeria',24:'Angola',32:'Argentina',36:'Australia',40:'Austria',50:'Bangladesh',56:'Belgium',64:'Bhutan',68:'Bolivia',70:'Bosnia and Herz.',76:'Brazil',100:'Bulgaria',104:'Myanmar',116:'Cambodia',120:'Cameroon',124:'Canada',140:'Central African Rep.',144:'Sri Lanka',148:'Chad',152:'Chile',156:'China',170:'Colombia',178:'Congo',180:'Dem. Rep. Congo',188:'Costa Rica',191:'Croatia',192:'Cuba',196:'Cyprus',203:'Czechia',208:'Denmark',214:'Dominican Rep.',218:'Ecuador',818:'Egypt',222:'El Salvador',226:'Eq. Guinea',232:'Eritrea',233:'Estonia',231:'Ethiopia',246:'Finland',250:'France',266:'Gabon',270:'Gambia',268:'Georgia',276:'Germany',288:'Ghana',300:'Greece',320:'Guatemala',324:'Guinea',328:'Guyana',332:'Haiti',340:'Honduras',348:'Hungary',352:'Iceland',356:'India',360:'Indonesia',364:'Iran',368:'Iraq',372:'Ireland',376:'Israel',380:'Italy',388:'Jamaica',392:'Japan',400:'Jordan',398:'Kazakhstan',404:'Kenya',408:'North Korea',410:'South Korea',414:'Kuwait',417:'Kyrgyzstan',418:'Laos',428:'Latvia',422:'Lebanon',426:'Lesotho',430:'Liberia',434:'Libya',440:'Lithuania',442:'Luxembourg',450:'Madagascar',454:'Malawi',458:'Malaysia',466:'Mali',478:'Mauritania',484:'Mexico',496:'Mongolia',498:'Moldova',504:'Morocco',508:'Mozambique',516:'Namibia',524:'Nepal',528:'Netherlands',540:'New Caledonia',554:'New Zealand',558:'Nicaragua',562:'Niger',566:'Nigeria',578:'Norway',512:'Oman',586:'Pakistan',591:'Panama',598:'Papua New Guinea',600:'Paraguay',604:'Peru',608:'Philippines',616:'Poland',620:'Portugal',634:'Qatar',642:'Romania',643:'Russia',646:'Rwanda',682:'Saudi Arabia',686:'Senegal',694:'Sierra Leone',702:'Singapore',703:'Slovakia',704:'Vietnam',705:'Slovenia',706:'Somalia',710:'South Africa',716:'Zimbabwe',724:'Spain',729:'Sudan',728:'S. Sudan',740:'Suriname',748:'eSwatini',752:'Sweden',756:'Switzerland',760:'Syria',158:'Taiwan',762:'Tajikistan',764:'Thailand',768:'Togo',780:'Trinidad and Tobago',788:'Tunisia',792:'Turkey',795:'Turkmenistan',800:'Uganda',804:'Ukraine',784:'United Arab Emirates',826:'United Kingdom',834:'Tanzania',840:'United States of America',858:'Uruguay',860:'Uzbekistan',862:'Venezuela',887:'Yemen',894:'Zambia',344:'Hong Kong',446:'Macau'};
+  // Antarctica ISO = 10, skip it
+  const SKIP_IDS = new Set([10]);
 
-  const W=960, H=480;
+  const W=960, H=500;
   const container = document.getElementById('mapContainer');
   if(!container) return;
 
@@ -1446,44 +1435,39 @@ body.life .contact-item{border-color:var(--faint);}
     .then(world => {
       const countries = topojson.feature(world, world.objects.countries);
 
-      function project(coords){
-        return [(coords[0]+180)/360*W, (90-coords[1])/180*H];
-      }
-
-      // Check if a ring crosses the antimeridian
-      function crossesAntimeridian(ring){
-        for(let i=0;i<ring.length-1;i++){
-          if(Math.abs(ring[i+1][0]-ring[i][0])>180) return true;
-        }
-        return false;
-      }
-
-      function ringToPath(ring){
-        // Skip rings that cross antimeridian (causes horizontal lines)
-        if(crossesAntimeridian(ring)) return '';
-        return ring.map((pt,i)=>{
-          const [x,y]=project(pt);
-          return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
-        }).join('')+'Z';
-      }
-
-      function geomToPath(geom){
-        if(geom.type==='Polygon') return geom.coordinates.map(ringToPath).join('');
-        if(geom.type==='MultiPolygon') return geom.coordinates.map(p=>p.map(ringToPath).join('')).join('');
-        return '';
-      }
+      // Use d3-geo Natural Earth projection — handles antimeridian correctly
+      const projection = d3.geoNaturalEarth1()
+        .fitSize([W, H], {type:'Sphere'});
+      const pathGen = d3.geoPath(projection);
 
       const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
       svg.setAttribute('viewBox','0 0 '+W+' '+H);
       svg.setAttribute('preserveAspectRatio','xMidYMid meet');
 
-      const ISO_NAMES={4:'Afghanistan',8:'Albania',12:'Algeria',24:'Angola',32:'Argentina',36:'Australia',40:'Austria',50:'Bangladesh',56:'Belgium',64:'Bhutan',68:'Bolivia',70:'Bosnia and Herz.',76:'Brazil',100:'Bulgaria',104:'Myanmar',116:'Cambodia',120:'Cameroon',124:'Canada',140:'Central African Rep.',144:'Sri Lanka',148:'Chad',152:'Chile',156:'China',170:'Colombia',178:'Congo',180:'Dem. Rep. Congo',188:'Costa Rica',191:'Croatia',192:'Cuba',196:'Cyprus',203:'Czechia',208:'Denmark',214:'Dominican Rep.',218:'Ecuador',818:'Egypt',222:'El Salvador',226:'Eq. Guinea',232:'Eritrea',233:'Estonia',231:'Ethiopia',246:'Finland',250:'France',266:'Gabon',270:'Gambia',268:'Georgia',276:'Germany',288:'Ghana',300:'Greece',320:'Guatemala',324:'Guinea',328:'Guyana',332:'Haiti',340:'Honduras',348:'Hungary',352:'Iceland',356:'India',360:'Indonesia',364:'Iran',368:'Iraq',372:'Ireland',376:'Israel',380:'Italy',388:'Jamaica',392:'Japan',400:'Jordan',398:'Kazakhstan',404:'Kenya',408:'North Korea',410:'South Korea',414:'Kuwait',417:'Kyrgyzstan',418:'Laos',428:'Latvia',422:'Lebanon',426:'Lesotho',430:'Liberia',434:'Libya',440:'Lithuania',442:'Luxembourg',450:'Madagascar',454:'Malawi',458:'Malaysia',466:'Mali',478:'Mauritania',484:'Mexico',496:'Mongolia',498:'Moldova',504:'Morocco',508:'Mozambique',516:'Namibia',524:'Nepal',528:'Netherlands',540:'New Caledonia',554:'New Zealand',558:'Nicaragua',562:'Niger',566:'Nigeria',578:'Norway',512:'Oman',586:'Pakistan',591:'Panama',598:'Papua New Guinea',600:'Paraguay',604:'Peru',608:'Philippines',616:'Poland',620:'Portugal',634:'Qatar',642:'Romania',643:'Russia',646:'Rwanda',682:'Saudi Arabia',686:'Senegal',694:'Sierra Leone',702:'Singapore',703:'Slovakia',704:'Vietnam',705:'Slovenia',706:'Somalia',710:'South Africa',716:'Zimbabwe',724:'Spain',729:'Sudan',728:'S. Sudan',740:'Suriname',748:'eSwatini',752:'Sweden',756:'Switzerland',760:'Syria',158:'Taiwan',762:'Tajikistan',764:'Thailand',768:'Togo',780:'Trinidad and Tobago',788:'Tunisia',792:'Turkey',795:'Turkmenistan',800:'Uganda',804:'Ukraine',784:'United Arab Emirates',826:'United Kingdom',834:'Tanzania',840:'United States of America',858:'Uruguay',860:'Uzbekistan',862:'Venezuela',887:'Yemen',894:'Zambia',344:'Hong Kong',446:'Macau'};
+      // Draw sphere outline (ocean boundary)
+      const sphere = document.createElementNS('http://www.w3.org/2000/svg','path');
+      sphere.setAttribute('d', pathGen({type:'Sphere'}));
+      sphere.setAttribute('fill','none');
+      sphere.setAttribute('stroke','var(--faint)');
+      sphere.setAttribute('stroke-width','0.5');
+      svg.appendChild(sphere);
+
+      // Draw graticule (subtle grid lines)
+      const graticule = d3.geoGraticule10();
+      const gratPath = document.createElementNS('http://www.w3.org/2000/svg','path');
+      gratPath.setAttribute('d', pathGen(graticule));
+      gratPath.setAttribute('fill','none');
+      gratPath.setAttribute('stroke','var(--faint)');
+      gratPath.setAttribute('stroke-width','0.15');
+      gratPath.setAttribute('opacity','0.4');
+      svg.appendChild(gratPath);
 
       countries.features.forEach(f=>{
         const id = +f.id;
+        if(SKIP_IDS.has(id)) return; // Skip Antarctica
         const name = ISO_NAMES[id] || '';
         const mapped = NAME_MAP[name] || name;
-        const d = geomToPath(f.geometry);
+        const d = pathGen(f);
         if(!d) return;
 
         const path = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -1501,7 +1485,7 @@ body.life .contact-item{border-color:var(--faint);}
 
       container.appendChild(svg);
 
-      // Tooltip (position:fixed, use clientX/Y directly)
+      // Tooltip (position:fixed)
       const tooltip = document.getElementById('mapTooltip');
       svg.addEventListener('mousemove', e=>{
         const t = e.target;
