@@ -674,8 +674,15 @@ img.char-img {
 }
 @media(max-width:860px){
   :root{--content-pad:24px;}
-  .hero{grid-template-columns:1fr;gap:0;}
-  .hero-left{padding:40px 0 24px;}
+  .hero{grid-template-columns:1fr;gap:0;min-height:auto;padding-left:24px;padding-right:24px;}
+  .hero-left{padding:32px 0 20px;}
+  .hero-right{padding:0;align-items:center;}
+  .char-slot{padding-top:50px;}
+  img.char-img{height:280px;}
+  .bubble{font-size:9px;padding:8px 16px;}
+
+  .nav-inner{padding-left:24px;padding-right:24px;}
+  .nav-anchors{display:none;}
 
   .proj-grid{grid-template-columns:1fr;}
   .proj:nth-child(odd){border-right:none;}
@@ -688,13 +695,121 @@ img.char-img {
   .photo-board{grid-template-columns:repeat(2,1fr);}
   .exp,.edu{grid-template-columns:1fr;gap:6px;}
   .footer{flex-direction:column;align-items:flex-start;}
+  .section{padding-top:56px;}
+  .sec-t{font-size:28px;}
 }
 @media(max-width:640px){
   :root{--content-pad:16px;}
-  .nav-anchors{display:none;}
-  .hero-card{padding:32px 28px;}
+  .hero{padding-left:16px;padding-right:16px;}
+  .hero-card{padding:28px 22px;}
+  .hero-hey{font-size:clamp(32px,8vw,48px);}
+  .hero-intro{font-size:15px;}
+  .hero-sub{font-size:13px;}
+  .hero-btns{flex-direction:column;gap:8px;}
+  .hero-btns .btn-p,.hero-btns .btn-s{text-align:center;width:100%;box-sizing:border-box;}
+  img.char-img{height:240px;}
+  .char-slot{padding-top:40px;}
+  .bubble{font-size:8px;padding:7px 14px;border-radius:16px;}
+
+  .nav-inner{padding-left:16px;padding-right:16px;}
+  .nav-cta{padding:6px 14px;font-size:11px;}
+
   .coffee-grid{grid-template-columns:1fr;}
+  .photo-board{grid-template-columns:1fr 1fr;padding:20px;gap:14px;}
+  .photo-card{padding:8px 8px 22px;}
+
+  .life-intro{padding:48px 0 32px;}
+  .life-body{font-size:14px;}
+  .note-text{font-size:clamp(17px,4vw,22px);}
+
+  .exp-logo,.edu-logo{width:36px;height:36px;}
+  .exp-role{font-size:15px;}
+  .exp-bullets li{font-size:13px;}
+  .proj{padding:22px 20px;}
+  .proj-title{font-size:15px;}
+  .proj-desc{font-size:13px;}
+
+  .contact-card{padding:32px 24px;border-radius:14px;}
+  .contact-title{font-size:22px;}
+  .contact-value{font-size:13px;}
+
+  #modeFloat{bottom:16px;}
+  .mf-btn{padding:7px 20px;font-size:8px;}
 }
+/* ── Touch devices: restore normal cursor ── */
+@media(hover:none),(pointer:coarse){
+  *{cursor:auto !important;}
+  #cur{display:none !important;}
+}
+@media(max-width:380px){
+  :root{--content-pad:12px;}
+  .hero{padding-left:12px;padding-right:12px;}
+  .hero-card{padding:24px 18px;}
+  img.char-img{height:200px;}
+  .char-slot{padding-top:32px;}
+  .nav-inner{padding-left:12px;padding-right:12px;}
+  .nav-logo{width:32px;height:32px;font-size:11px;}
+  .sec-t{font-size:24px;}
+}
+
+/* ══ CONTACT MODAL ══ */
+.contact-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  z-index:9999;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.contact-overlay.open{opacity:1;pointer-events:auto;}
+.contact-card{
+  background:#FFFDF9;border:1px solid var(--faint);border-radius:18px;
+  padding:40px 44px;max-width:400px;width:90%;position:relative;
+  transform:translateY(20px) scale(.96);transition:transform .35s;
+  box-shadow:0 24px 80px rgba(0,0,0,.12);
+}
+.contact-overlay.open .contact-card{transform:translateY(0) scale(1);}
+.contact-close{
+  position:absolute;top:16px;right:18px;background:none;border:none;
+  font-size:20px;color:var(--mid);cursor:pointer;transition:color .2s;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+}
+.contact-close:hover{color:var(--ink);background:var(--bg2);}
+.contact-title{
+  font-family:var(--font-serif);font-size:26px;font-weight:300;
+  margin-bottom:6px;
+}
+.contact-sub{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;
+  color:var(--mid);margin-bottom:28px;
+}
+.contact-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;}
+.contact-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--faint);
+  text-decoration:none;color:var(--ink);transition:background .2s;
+  border-radius:0;
+}
+.contact-item:last-child{border-bottom:none;}
+.contact-item:hover{opacity:.7;}
+.contact-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;background:var(--bg2);flex-shrink:0;
+}
+.contact-info{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.contact-label{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--mid);
+}
+.contact-value{
+  font-size:14px;font-weight:500;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+body.life .contact-card{background:var(--card-bg);border-color:var(--card-border);}
+body.life .contact-close{color:var(--mid);}
+body.life .contact-close:hover{color:var(--ink);}
+body.life .contact-icon{background:var(--bg2);}
+body.life .contact-item{border-color:var(--faint);}
 </style>
 </head>
 <body>
@@ -738,7 +853,7 @@ img.char-img {
           <p class="hero-sub" style="margin-top:10px;">Experience in <b>strategy consulting</b>, <b>government affairs</b> & <b>pharma advisory</b>. Currently seeking opportunities in <b>AI & Product</b>.</p>
           <div class="hero-btns" style="margin-top:26px;">
             <a class="btn-p" href="#experience">View My Experience ↓</a>
-            <a class="btn-s" href="mailto:zihengxie2004@outlook.com">Get In Touch</a>
+            <a class="btn-s" href="#" onclick="openContact(event)">Get In Touch</a>
           </div>
         </div>
 
@@ -748,7 +863,7 @@ img.char-img {
           <p class="hero-sub" style="margin-top:10px;">Paris-based · Builder · Reader · <b>Always making something</b></p>
           <div class="hero-btns" style="margin-top:26px;">
             <a class="btn-p" href="#myworld">See My World ↓</a>
-            <a class="btn-s" href="mailto:zihengxie2004@outlook.com">Get In Touch</a>
+            <a class="btn-s" href="#" onclick="openContact(event)">Get In Touch</a>
           </div>
         </div>
       </div>
@@ -951,7 +1066,7 @@ img.char-img {
       <p class="life-body">I build things, read things, go places. Curious about AI, good design, and why some cities feel alive. Always finding the best café in town.</p>
       <div class="hero-btns">
         <a class="btn-p" href="#myworld">See My World ↓</a>
-        <a class="btn-s" href="mailto:zihengxie2004@outlook.com">Get In Touch</a>
+        <a class="btn-s" href="#" onclick="openContact(event)">Get In Touch</a>
       </div>
     </div>
   </div>
@@ -1264,5 +1379,67 @@ function setMode(m) {
   window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
+<!-- ══ CONTACT MODAL ══ -->
+<div class="contact-overlay" id="contactOverlay" onclick="closeContact(event)">
+  <div class="contact-card" onclick="event.stopPropagation()">
+    <button class="contact-close" onclick="closeContact(event)">&times;</button>
+    <div class="contact-title">Let's Connect</div>
+    <div class="contact-sub">Feel free to reach out through any channel</div>
+    <div class="contact-list">
+      <a class="contact-item" href="mailto:zihengxie2004@outlook.com">
+        <div class="contact-icon">📧</div>
+        <div class="contact-info">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">zihengxie2004@outlook.com</span>
+        </div>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/ziheng-xie-08546b338/" target="_blank">
+        <div class="contact-icon">💼</div>
+        <div class="contact-info">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">Ziheng Xie</span>
+        </div>
+      </a>
+      <a class="contact-item" href="https://instagram.com/ziang._.hsia" target="_blank">
+        <div class="contact-icon">📸</div>
+        <div class="contact-info">
+          <span class="contact-label">Instagram</span>
+          <span class="contact-value">@ziang._.hsia</span>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">💬</div>
+        <div class="contact-info">
+          <span class="contact-label">WeChat / Phone</span>
+          <span class="contact-value">15821778633</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Contact modal ──
+function openContact(e) {
+  e.preventDefault();
+  document.getElementById('contactOverlay').classList.add('open');
+}
+function closeContact(e) {
+  e.preventDefault();
+  document.getElementById('contactOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('contactOverlay').classList.remove('open');
+});
+
+// ── Hover on character to switch bubble ──
+document.getElementById('charTilt').addEventListener('mouseenter', () => {
+  bIdx = (bIdx + 1) % BUBBLES[mode].length;
+  showBubble();
+  clearInterval(bTimer);
+  bTimer = setInterval(() => { bIdx = (bIdx + 1) % BUBBLES[mode].length; showBubble(); }, 3000);
+});
+</script>
+
 </body>
 </html>
