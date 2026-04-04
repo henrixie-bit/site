@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lt /Users/xieziheng/Downloads/*.png)",
+      "Bash(ls -lt /Users/xieziheng/Downloads/*.jpg)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''PIL available''\\)\")",
+      "Bash(python3:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(open -a \"Google Chrome\" \"http://localhost:3456/henri-final.html\")",
+      "Bash(sed -n '200,215p' /Users/xieziheng/Downloads/henri-site/index.html)",
+      "Bash(sed -n '205,215p' /Users/xieziheng/Downloads/henri-site/index.html)",
+      "Bash(sed -n '287,305p' /Users/xieziheng/Downloads/henri-site/index.html)",
+      "Bash(pip3 install:*)",
+      "WebFetch(domain:logo.clearbit.com)"
+    ]
+  }
+}

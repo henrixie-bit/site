@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "henri-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/Users/xieziheng/Downloads/henri-site/serve.py"],
+      "port": 3456
+    }
+  ]
+}
