@@ -491,18 +491,20 @@ img.char-img {
   background:var(--card-bg);border:1px solid var(--card-border);
   border-radius:14px;padding:32px;position:relative;
   transition:background .7s,border-color .7s;overflow:hidden;
+  box-sizing:border-box;width:100%;
 }
-.map-wrap svg{width:100%;height:auto;display:block;}
+#mapContainer{width:100%;overflow:hidden;}
+.map-wrap svg{width:100%;height:auto;display:block;max-width:100%;}
 .map-wrap .land{fill:var(--bg2);stroke:var(--faint);stroke-width:.3;transition:fill .7s,stroke .7s;}
 .map-wrap .visited{fill:var(--accent);opacity:.75;stroke:var(--bg);stroke-width:.4;cursor:pointer;transition:fill .3s,opacity .3s;}
 .map-wrap .visited:hover{opacity:1;filter:brightness(1.1);}
 .map-tooltip{
-  position:absolute;pointer-events:none;
+  position:fixed;pointer-events:none;
   background:var(--ink);color:var(--bg);
   font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;
   padding:6px 14px;border-radius:8px;white-space:nowrap;
-  opacity:0;transition:opacity .2s;z-index:10;
-  transform:translate(-50%,-100%) translateY(-8px);
+  opacity:0;transition:opacity .15s;z-index:10000;
+  transform:translate(-50%,-100%) translateY(-10px);
 }
 .map-tooltip.show{opacity:1;}
 .map-stats{
@@ -1139,18 +1141,28 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="int-grid">
         <div class="int-item">
           <div class="int-n">01</div>
-          <div class="int-title">AI & Products</div>
-          <p class="int-body">对 AI 产品感兴趣，关注 AI 如何真正改变人的工作方式，而不只是演示 demo。</p>
+          <div class="int-title">Running 🏃</div>
+          <p class="int-body">正在备赛里昂马拉松。从 5K 到半马再到全马，跑步是和自己较劲最纯粹的方式。</p>
         </div>
         <div class="int-item">
           <div class="int-n">02</div>
-          <div class="int-title">【爱好二】</div>
-          <p class="int-body">【描述一下你的第二个兴趣爱好。】</p>
+          <div class="int-title">Podcasts 🎙️</div>
+          <p class="int-body">通勤和跑步的时候永远在听播客。商业、科技、叙事类都听，偶尔也听法语播客练耳朵。</p>
         </div>
         <div class="int-item">
           <div class="int-n">03</div>
-          <div class="int-title">【爱好三】</div>
-          <p class="int-body">【描述一下你的第三个兴趣爱好。】</p>
+          <div class="int-title">Hiking & Travel 🥾</div>
+          <p class="int-body">去过 20+ 个国家和地区，喜欢在陌生城市暴走。挪威的峡湾徒步是目前的人生巅峰体验。</p>
+        </div>
+        <div class="int-item">
+          <div class="int-n">04</div>
+          <div class="int-title">LEGO MOC 🧱</div>
+          <p class="int-body">My Own Creation — 不按说明书来，自己设计搭建。最喜欢建筑和机械结构类，享受从零开始创造的过程。</p>
+        </div>
+        <div class="int-item">
+          <div class="int-n">05</div>
+          <div class="int-title">AI & Products 🤖</div>
+          <p class="int-body">关注 AI 如何真正改变人的工作方式，而不只是演示 demo。自己也在动手做 AI 相关的项目。</p>
         </div>
       </div>
     </div>
@@ -1438,38 +1450,21 @@ body.life .contact-item{border-color:var(--faint);}
         return [(coords[0]+180)/360*W, (90-coords[1])/180*H];
       }
 
-      // Split rings that cross the antimeridian to avoid horizontal lines
-      function splitRing(ring){
-        const segments = [[]];
-        for(let i=0;i<ring.length;i++){
-          const cur = ring[i];
-          segments[segments.length-1].push(cur);
-          if(i<ring.length-1){
-            const next = ring[i+1];
-            // If longitude jump > 180°, it crosses the antimeridian
-            if(Math.abs(next[0]-cur[0])>180){
-              segments.push([]);
-            }
-          }
+      // Check if a ring crosses the antimeridian
+      function crossesAntimeridian(ring){
+        for(let i=0;i<ring.length-1;i++){
+          if(Math.abs(ring[i+1][0]-ring[i][0])>180) return true;
         }
-        return segments;
-      }
-
-      function segmentToPath(seg){
-        if(seg.length<2) return '';
-        return seg.map((pt,i)=>{
-          const [x,y]=project(pt);
-          return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
-        }).join('');
+        return false;
       }
 
       function ringToPath(ring){
-        const segs = splitRing(ring);
-        if(segs.length===1){
-          return segmentToPath(ring)+'Z';
-        }
-        // Multiple segments = crosses antimeridian, render each separately
-        return segs.filter(s=>s.length>=2).map(s=>segmentToPath(s)+'Z').join('');
+        // Skip rings that cross antimeridian (causes horizontal lines)
+        if(crossesAntimeridian(ring)) return '';
+        return ring.map((pt,i)=>{
+          const [x,y]=project(pt);
+          return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
+        }).join('')+'Z';
       }
 
       function geomToPath(geom){
@@ -1506,16 +1501,15 @@ body.life .contact-item{border-color:var(--faint);}
 
       container.appendChild(svg);
 
-      // Tooltip
+      // Tooltip (position:fixed, use clientX/Y directly)
       const tooltip = document.getElementById('mapTooltip');
       svg.addEventListener('mousemove', e=>{
         const t = e.target;
         if(t.classList.contains('visited')){
           tooltip.textContent = t.getAttribute('data-country') + ' · First visited ' + t.getAttribute('data-date');
           tooltip.classList.add('show');
-          const rect = container.getBoundingClientRect();
-          tooltip.style.left = (e.clientX - rect.left) + 'px';
-          tooltip.style.top = (e.clientY - rect.top) + 'px';
+          tooltip.style.left = e.clientX + 'px';
+          tooltip.style.top = e.clientY + 'px';
         } else {
           tooltip.classList.remove('show');
         }
@@ -1530,9 +1524,8 @@ body.life .contact-item{border-color:var(--faint);}
           tooltip.textContent = t.getAttribute('data-country') + ' · First visited ' + t.getAttribute('data-date');
           tooltip.classList.add('show');
           const touch = e.touches[0];
-          const rect = container.getBoundingClientRect();
-          tooltip.style.left = (touch.clientX - rect.left) + 'px';
-          tooltip.style.top = (touch.clientY - rect.top) + 'px';
+          tooltip.style.left = touch.clientX + 'px';
+          tooltip.style.top = touch.clientY + 'px';
           setTimeout(()=> tooltip.classList.remove('show'), 2000);
         }
       }, {passive:false});
