@@ -693,6 +693,11 @@ img.char-img {
   .movie-grid{grid-template-columns:1fr;}
   .coffee-grid{grid-template-columns:1fr 1fr;}
 
+  .map-wrap{padding:24px 16px;}
+  .map-stats{gap:24px;}
+  .map-stat-n{font-size:28px;}
+  .world-sec{padding:48px 0;}
+
   .exp,.edu{grid-template-columns:1fr;gap:6px;}
   .footer{flex-direction:column;align-items:flex-start;}
   .section{padding-top:56px;}
@@ -716,14 +721,41 @@ img.char-img {
   .nav-cta{padding:6px 14px;font-size:11px;}
 
   .coffee-grid{grid-template-columns:1fr;}
-  .map-wrap{padding:20px;}
-  .map-stats{gap:20px;flex-wrap:wrap;}
-  .map-stat-n{font-size:24px;}
 
+  /* Map */
+  .map-wrap{padding:16px 12px;border-radius:10px;}
+  .map-stats{gap:16px;flex-wrap:wrap;}
+  .map-stat-n{font-size:22px;}
+  .map-stat-label{font-size:7px;}
+  .map-tooltip{font-size:9px;padding:5px 10px;}
+  .world-sec{padding:36px 0;}
+  .world-subtitle{font-size:8px;margin-bottom:16px;}
+
+  /* Life sections */
   .life-intro{padding:48px 0 32px;}
   .life-body{font-size:14px;}
   .note-text{font-size:clamp(17px,4vw,22px);}
+  .note-block{padding-left:18px;}
+  .thought-sec{padding:48px 0 60px;}
 
+  /* Interests */
+  .int-item{padding:20px 18px 24px;}
+  .int-n{font-size:36px;}
+  .int-title{font-size:15px;}
+  .int-body{font-size:13px;}
+
+  /* Movies */
+  .movie{padding:18px 18px;}
+  .movie-title{font-size:14px;}
+  .movie-note{font-size:12px;}
+
+  /* Coffee */
+  .cf-card{padding:18px 16px 16px;border-radius:10px;}
+  .cf-name{font-size:14px;}
+  .cf-drink{font-size:12px;}
+  .cf-note{font-size:11px;}
+
+  /* Experience & Education */
   .exp-logo,.edu-logo{width:36px;height:36px;}
   .exp-role{font-size:15px;}
   .exp-bullets li{font-size:13px;}
@@ -731,12 +763,19 @@ img.char-img {
   .proj-title{font-size:15px;}
   .proj-desc{font-size:13px;}
 
+  /* Contact modal */
   .contact-card{padding:32px 24px;border-radius:14px;}
   .contact-title{font-size:22px;}
   .contact-value{font-size:13px;}
+  .contact-icon{width:32px;height:32px;font-size:16px;border-radius:8px;}
+  .contact-item{gap:10px;padding:12px 0;}
 
+  /* Float toggle */
   #modeFloat{bottom:16px;}
   .mf-btn{padding:7px 20px;font-size:8px;}
+
+  /* Footer */
+  .footer-q{font-size:14px;}
 }
 /* ── Touch devices: restore normal cursor ── */
 @media(hover:none),(pointer:coarse){
@@ -752,6 +791,13 @@ img.char-img {
   .nav-inner{padding-left:12px;padding-right:12px;}
   .nav-logo{width:32px;height:32px;font-size:11px;}
   .sec-t{font-size:24px;}
+  .map-wrap{padding:12px 8px;}
+  .map-stats{gap:12px;}
+  .map-stat-n{font-size:20px;}
+  .contact-card{padding:28px 18px;}
+  .contact-value{font-size:12px;}
+  .cf-card{padding:16px 14px 14px;}
+  .int-item{padding:16px 14px 20px;}
 }
 
 /* ══ CONTACT MODAL ══ */
@@ -1080,7 +1126,7 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="map-tooltip" id="mapTooltip"></div>
       <div id="mapContainer"></div>
       <div class="map-stats">
-        <div><div class="map-stat-n">20</div><div class="map-stat-label">Countries & Regions</div></div>
+        <div><div class="map-stat-n">21</div><div class="map-stat-label">Countries & Regions</div></div>
         <div><div class="map-stat-n">4</div><div class="map-stat-label">Continents</div></div>
         <div><div class="map-stat-n">∞</div><div class="map-stat-label">Memories</div></div>
       </div>
@@ -1351,7 +1397,7 @@ body.life .contact-item{border-color:var(--faint);}
 (function(){
   const VISITED = {
     'China':       '2004',
-    'South Korea': '2012',
+    'South Korea': '2019',
     'Japan':       '2019',
     'Taiwan':      '2018',
     'Hong Kong':   '2015',
@@ -1359,19 +1405,19 @@ body.life .contact-item{border-color:var(--faint);}
     'Malaysia':    '2017',
     'Singapore':   '2017',
     'Australia':   '2019',
-    'United Arab Emirates': '2023',
-    'Norway':      '2024',
-    'Sweden':      '2024',
-    'Denmark':     '2024',
-    'Netherlands': '2024',
-    'Germany':     '2023',
-    'Poland':      '2024',
+    'United Arab Emirates': '2025',
+    'Norway':      '2025',
+    'Sweden':      '2025',
+    'Denmark':     '2025',
+    'Netherlands': '2025',
+    'Germany':     '2025',
+    'Poland':      '2025',
     'France':      '2022',
-    'Spain':       '2023',
-    'Portugal':    '2023',
-    'Italy':       '2023'
+    'Spain':       '2025',
+    'Portugal':    '2025',
+    'Italy':       '2025',
+    'Belgium':     '2025'
   };
-  // Name mapping from Natural Earth to our names
   const NAME_MAP = {
     'Korea':'South Korea','Rep. Korea':'South Korea','S. Korea':'South Korea',
     'Dem. Rep. Korea':'North Korea',
@@ -1379,7 +1425,7 @@ body.life .contact-item{border-color:var(--faint);}
     'United Arab Em.':'United Arab Emirates'
   };
 
-  const W=960, H=500;
+  const W=960, H=480;
   const container = document.getElementById('mapContainer');
   if(!container) return;
 
@@ -1388,43 +1434,54 @@ body.life .contact-item{border-color:var(--faint);}
     .then(world => {
       const countries = topojson.feature(world, world.objects.countries);
 
-      // Simple equirectangular projection
       function project(coords){
-        const x = (coords[0]+180)/360*W;
-        const y = (90-coords[1])/180*H;
-        return [x,y];
+        return [(coords[0]+180)/360*W, (90-coords[1])/180*H];
       }
-      function ringToPath(ring){
-        return ring.map((pt,i)=>{
+
+      // Split rings that cross the antimeridian to avoid horizontal lines
+      function splitRing(ring){
+        const segments = [[]];
+        for(let i=0;i<ring.length;i++){
+          const cur = ring[i];
+          segments[segments.length-1].push(cur);
+          if(i<ring.length-1){
+            const next = ring[i+1];
+            // If longitude jump > 180°, it crosses the antimeridian
+            if(Math.abs(next[0]-cur[0])>180){
+              segments.push([]);
+            }
+          }
+        }
+        return segments;
+      }
+
+      function segmentToPath(seg){
+        if(seg.length<2) return '';
+        return seg.map((pt,i)=>{
           const [x,y]=project(pt);
           return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
-        }).join('')+'Z';
+        }).join('');
       }
+
+      function ringToPath(ring){
+        const segs = splitRing(ring);
+        if(segs.length===1){
+          return segmentToPath(ring)+'Z';
+        }
+        // Multiple segments = crosses antimeridian, render each separately
+        return segs.filter(s=>s.length>=2).map(s=>segmentToPath(s)+'Z').join('');
+      }
+
       function geomToPath(geom){
         if(geom.type==='Polygon') return geom.coordinates.map(ringToPath).join('');
         if(geom.type==='MultiPolygon') return geom.coordinates.map(p=>p.map(ringToPath).join('')).join('');
         return '';
       }
 
-      // Country name lookup from Natural Earth IDs
-      // We'll use the built-in properties
       const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
       svg.setAttribute('viewBox','0 0 '+W+' '+H);
       svg.setAttribute('preserveAspectRatio','xMidYMid meet');
 
-      // Try to get country names from properties
-      // world-atlas uses numeric IDs, we need a name mapping
-      const ID_NAMES = {};
-      // Fetch country names
-      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-        .then(()=>{
-          // The features have id property (ISO numeric)
-          // We need to map these. Let's use a separate names file
-          return fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
-        });
-
-      // Alternative: use the 'name' property if available, otherwise use a static map
-      // world-atlas@2 countries have numeric IDs, we need ISO mapping
       const ISO_NAMES={4:'Afghanistan',8:'Albania',12:'Algeria',24:'Angola',32:'Argentina',36:'Australia',40:'Austria',50:'Bangladesh',56:'Belgium',64:'Bhutan',68:'Bolivia',70:'Bosnia and Herz.',76:'Brazil',100:'Bulgaria',104:'Myanmar',116:'Cambodia',120:'Cameroon',124:'Canada',140:'Central African Rep.',144:'Sri Lanka',148:'Chad',152:'Chile',156:'China',170:'Colombia',178:'Congo',180:'Dem. Rep. Congo',188:'Costa Rica',191:'Croatia',192:'Cuba',196:'Cyprus',203:'Czechia',208:'Denmark',214:'Dominican Rep.',218:'Ecuador',818:'Egypt',222:'El Salvador',226:'Eq. Guinea',232:'Eritrea',233:'Estonia',231:'Ethiopia',246:'Finland',250:'France',266:'Gabon',270:'Gambia',268:'Georgia',276:'Germany',288:'Ghana',300:'Greece',320:'Guatemala',324:'Guinea',328:'Guyana',332:'Haiti',340:'Honduras',348:'Hungary',352:'Iceland',356:'India',360:'Indonesia',364:'Iran',368:'Iraq',372:'Ireland',376:'Israel',380:'Italy',388:'Jamaica',392:'Japan',400:'Jordan',398:'Kazakhstan',404:'Kenya',408:'North Korea',410:'South Korea',414:'Kuwait',417:'Kyrgyzstan',418:'Laos',428:'Latvia',422:'Lebanon',426:'Lesotho',430:'Liberia',434:'Libya',440:'Lithuania',442:'Luxembourg',450:'Madagascar',454:'Malawi',458:'Malaysia',466:'Mali',478:'Mauritania',484:'Mexico',496:'Mongolia',498:'Moldova',504:'Morocco',508:'Mozambique',516:'Namibia',524:'Nepal',528:'Netherlands',540:'New Caledonia',554:'New Zealand',558:'Nicaragua',562:'Niger',566:'Nigeria',578:'Norway',512:'Oman',586:'Pakistan',591:'Panama',598:'Papua New Guinea',600:'Paraguay',604:'Peru',608:'Philippines',616:'Poland',620:'Portugal',634:'Qatar',642:'Romania',643:'Russia',646:'Rwanda',682:'Saudi Arabia',686:'Senegal',694:'Sierra Leone',702:'Singapore',703:'Slovakia',704:'Vietnam',705:'Slovenia',706:'Somalia',710:'South Africa',716:'Zimbabwe',724:'Spain',729:'Sudan',728:'S. Sudan',740:'Suriname',748:'eSwatini',752:'Sweden',756:'Switzerland',760:'Syria',158:'Taiwan',762:'Tajikistan',764:'Thailand',768:'Togo',780:'Trinidad and Tobago',788:'Tunisia',792:'Turkey',795:'Turkmenistan',800:'Uganda',804:'Ukraine',784:'United Arab Emirates',826:'United Kingdom',834:'Tanzania',840:'United States of America',858:'Uruguay',860:'Uzbekistan',862:'Venezuela',887:'Yemen',894:'Zambia',344:'Hong Kong',446:'Macau'};
 
       countries.features.forEach(f=>{
@@ -1454,9 +1511,7 @@ body.life .contact-item{border-color:var(--faint);}
       svg.addEventListener('mousemove', e=>{
         const t = e.target;
         if(t.classList.contains('visited')){
-          const name = t.getAttribute('data-country');
-          const date = t.getAttribute('data-date');
-          tooltip.textContent = name + ' · First visited ' + date;
+          tooltip.textContent = t.getAttribute('data-country') + ' · First visited ' + t.getAttribute('data-date');
           tooltip.classList.add('show');
           const rect = container.getBoundingClientRect();
           tooltip.style.left = (e.clientX - rect.left) + 'px';
@@ -1472,9 +1527,7 @@ body.life .contact-item{border-color:var(--faint);}
         const t = e.target;
         if(t.classList.contains('visited')){
           e.preventDefault();
-          const name = t.getAttribute('data-country');
-          const date = t.getAttribute('data-date');
-          tooltip.textContent = name + ' · First visited ' + date;
+          tooltip.textContent = t.getAttribute('data-country') + ' · First visited ' + t.getAttribute('data-date');
           tooltip.classList.add('show');
           const touch = e.touches[0];
           const rect = container.getBoundingClientRect();
