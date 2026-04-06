@@ -1116,7 +1116,6 @@ body.life .contact-item{border-color:var(--faint);}
       <p class="life-body">I build things, read things, go places. Curious about AI, good design, and why some cities feel alive. Always finding the best café in town.</p>
       <div class="hero-btns">
         <a class="btn-p" href="#myworld">See My World ↓</a>
-        <a class="btn-s" href="#" onclick="openContact(event)">Get In Touch</a>
       </div>
     </div>
   </div>
@@ -1128,7 +1127,7 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="map-tooltip" id="mapTooltip"></div>
       <div id="mapContainer"></div>
       <div class="map-stats">
-        <div><div class="map-stat-n">21</div><div class="map-stat-label">Countries & Regions</div></div>
+        <div><div class="map-stat-n">22</div><div class="map-stat-label">Countries & Regions</div></div>
         <div><div class="map-stat-n">4</div><div class="map-stat-label">Continents</div></div>
         <div><div class="map-stat-n">∞</div><div class="map-stat-label">Memories</div></div>
       </div>
@@ -1164,6 +1163,9 @@ body.life .contact-item{border-color:var(--faint);}
           <div class="int-title">AI & Products 🤖</div>
           <p class="int-body">关注 AI 如何真正改变人的工作方式，而不只是演示 demo。自己也在动手做 AI 相关的项目。</p>
         </div>
+        <div class="int-item" style="display:flex;align-items:center;justify-content:center;">
+          <div class="int-title" style="margin:0;">未完待续 …</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1175,37 +1177,41 @@ body.life .contact-item{border-color:var(--faint);}
         <div class="movie">
           <div class="movie-poster" style="background:#C8963C;"></div>
           <div class="movie-info">
-            <div class="movie-title">The Brutalist</div>
-            <div class="movie-meta">Brady Corbet · 2024</div>
+            <div class="movie-title">Project Hail Mary</div>
+            <div class="movie-meta">Phil Lord & Chris Miller · 2026</div>
             <div class="movie-stars">★★★★★</div>
-            <div class="movie-note">三个半小时的史诗，每一帧都像建筑本身——沉重、精确、不容妥协。Adrien Brody 演出了一种被时代碾过又拒绝倒下的生命力。</div>
+          </div>
+        </div>
+        <div class="movie">
+          <div class="movie-poster" style="background:#8B7355;"></div>
+          <div class="movie-info">
+            <div class="movie-title">山河故人</div>
+            <div class="movie-meta">贾樟柯 · 2015</div>
+            <div class="movie-stars">★★★★★</div>
           </div>
         </div>
         <div class="movie">
           <div class="movie-poster" style="background:#6A8FA8;"></div>
           <div class="movie-info">
-            <div class="movie-title">Anora</div>
-            <div class="movie-meta">Sean Baker · 2024</div>
-            <div class="movie-stars">★★★★☆</div>
-            <div class="movie-note">金棕榈实至名归。前半段浪漫喜剧的壳，后半段撕开阶级的真相。Mikey Madison 太生猛了。</div>
+            <div class="movie-title">麻将</div>
+            <div class="movie-meta">杨德昌 · 1996</div>
+            <div class="movie-stars">★★★★★</div>
           </div>
         </div>
         <div class="movie">
           <div class="movie-poster" style="background:#8F6A7A;"></div>
           <div class="movie-info">
-            <div class="movie-title">Conclave</div>
-            <div class="movie-meta">Edward Berger · 2024</div>
+            <div class="movie-title">隔壁房间</div>
+            <div class="movie-meta">Pedro Almodóvar · 2024</div>
             <div class="movie-stars">★★★★☆</div>
-            <div class="movie-note">密室政治惊悚片，Ralph Fiennes 用眼神就能演完一整场权力博弈。结尾反转让人沉默很久。</div>
           </div>
         </div>
         <div class="movie">
           <div class="movie-poster" style="background:#6A8A6A;"></div>
           <div class="movie-info">
-            <div class="movie-title">Past Lives</div>
-            <div class="movie-meta">Celine Song · 2023</div>
+            <div class="movie-title">晒后假日</div>
+            <div class="movie-meta">Charlotte Wells · 2022</div>
             <div class="movie-stars">★★★★★</div>
-            <div class="movie-note">看完在电影院坐了很久没走。关于错过、关于因缘、关于那些「如果当初」。最后长椅上的沉默胜过一切台词。</div>
           </div>
         </div>
       </div>
@@ -1231,22 +1237,6 @@ body.life .contact-item{border-color:var(--faint);}
             <div class="cf-score">5 / 5</div>
           </div>
           <div class="cf-note">Rue Villedo 附近，藏在一条小巷里，来了还想再来。</div>
-        </div>
-
-        <div class="cf-card">
-          <div class="cf-card-top">
-            <div class="cf-name">%Arabica</div>
-            <div class="cf-city">Shanghai</div>
-          </div>
-          <div class="cf-divider"></div>
-          <div class="cf-drink">喝了 <span>Iced Latte</span>，奶味柔和，咖啡香不突出。</div>
-          <div class="cf-rating">
-            <div class="cf-dots">
-              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot"></div>
-            </div>
-            <div class="cf-score">4 / 5</div>
-          </div>
-          <div class="cf-note">颜值高，出片。但更像打卡地点，咖啡本身中规中矩。</div>
         </div>
 
         <div class="cf-card">
@@ -1295,22 +1285,6 @@ body.life .contact-item{border-color:var(--faint);}
             <div class="cf-score">5 / 5</div>
           </div>
           <div class="cf-note">Canal Saint-Martin 旁边，巴黎精品咖啡鼻祖之一。</div>
-        </div>
-
-        <div class="cf-card">
-          <div class="cf-card-top">
-            <div class="cf-name">Seesaw Coffee</div>
-            <div class="cf-city">Shanghai</div>
-          </div>
-          <div class="cf-divider"></div>
-          <div class="cf-drink">喝了 <span>Cold Brew Tonic</span>，苦感和气泡感平衡好。</div>
-          <div class="cf-rating">
-            <div class="cf-dots">
-              <div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot on"></div><div class="cf-dot"></div>
-            </div>
-            <div class="cf-score">4 / 5</div>
-          </div>
-          <div class="cf-note">国内精品咖啡连锁里做得最认真的，创意特调值得试。</div>
         </div>
 
         <div class="cf-card">
@@ -1384,7 +1358,7 @@ body.life .contact-item{border-color:var(--faint);}
   <section class="thought-sec" id="thought">
     <div class="container">
       <div class="note-block">
-        <p class="note-text">「【一句想法或者喜欢的话】」</p>
+        <p class="note-text">「時不可兮驟得 聊逍遙兮容與」</p>
         <div class="note-credit">— Henri Xie</div>
       </div>
     </div>
@@ -1414,7 +1388,8 @@ body.life .contact-item{border-color:var(--faint);}
     'Australia':'2019','United Arab Emirates':'2025',
     'Norway':'2025','Sweden':'2025','Denmark':'2025','Netherlands':'2025',
     'Germany':'2025','Poland':'2025','France':'2022','Spain':'2025',
-    'Portugal':'2025','Italy':'2025','Belgium':'2025'
+    'Portugal':'2025','Italy':'2025','Belgium':'2025',
+    'Switzerland':'2025'
   };
   const NAME_MAP = {
     'Korea':'South Korea','Rep. Korea':'South Korea','S. Korea':'South Korea',
