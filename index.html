@@ -204,6 +204,7 @@ body.life .mf-btn.on{background:var(--float-bg);}
   width:160px;height:160px;
   background:radial-gradient(circle at top right,rgba(48,40,160,.07),transparent 70%);
   pointer-events:none;transition:background .8s;
+  border-radius:inherit;
 }
 body.life .hero-card::before{
   background:radial-gradient(circle at top right,rgba(160,96,32,.09),transparent 70%);
@@ -784,6 +785,10 @@ img.char-img {
   *{cursor:auto !important;}
   #cur{display:none !important;}
 }
+@media(max-width:860px){
+  #cur{display:none !important;}
+  *{cursor:auto !important;}
+}
 @media(max-width:380px){
   :root{--content-pad:12px;}
   .hero{padding-left:12px;padding-right:12px;}
@@ -877,7 +882,7 @@ body.life .contact-item{border-color:var(--faint);}
       <a class="nav-anchor" id="a3" href="#education">Education</a>
       <a class="nav-anchor" id="a4" href="#skills">Skills</a>
     </div>
-    <a class="nav-cta" href="mailto:zihengxie2004@outlook.com">Let's Talk</a>
+    <a class="nav-cta" href="#" onclick="openContact(event)">Let's Talk</a>
   </div>
 </nav>
 
@@ -1109,17 +1114,6 @@ body.life .contact-item{border-color:var(--faint);}
 <!-- ══ LIFE CONTENT ══ -->
 <div class="content-life" id="contentLife">
 
-  <div class="container">
-    <div class="life-intro">
-      <div class="life-kicker">Personal · Issue No.01</div>
-      <h2 class="life-headline">Beyond the<br><em>résumé.</em></h2>
-      <p class="life-body">I build things, read things, go places. Curious about AI, good design, and why some cities feel alive. Always finding the best café in town.</p>
-      <div class="hero-btns">
-        <a class="btn-p" href="#myworld">See My World ↓</a>
-      </div>
-    </div>
-  </div>
-
   <div class="container world-sec" id="myworld">
     <div class="sec-label world-title-row"><span class="sec-n">✦</span><h2 class="sec-t">My World</h2></div>
     <div class="world-subtitle">→ Hover / tap a country to see when I first visited</div>
@@ -1212,6 +1206,11 @@ body.life .contact-item{border-color:var(--faint);}
             <div class="movie-title">晒后假日</div>
             <div class="movie-meta">Charlotte Wells · 2022</div>
             <div class="movie-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="movie" style="display:flex;align-items:center;justify-content:center;">
+          <div class="movie-info" style="text-align:center;">
+            <div class="movie-title" style="margin:0;">未完待续 …</div>
           </div>
         </div>
       </div>
@@ -1574,7 +1573,7 @@ function setMode(m) {
   switchChar(isLife);
   const labels = isLife
     ? [['#myworld','My World'],['#interests','Interests'],['#reading','Watches'],['#thought','Thoughts']]
-    : [['#experience','Experience'],['#projects','Projects'],['#education','Education'],['#skills','Skills']];
+    : [['#education','Education'],['#experience','Experience'],['#projects','Projects'],['#skills','Skills']];
   ['a1','a2','a3','a4'].forEach((id,i) => {
     const el = document.getElementById(id);
     el.href = labels[i][0]; el.textContent = labels[i][1];
