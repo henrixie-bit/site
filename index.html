@@ -362,15 +362,15 @@ img.char-img {
   transition:border-color .7s;
 }
 .exp:last-child{border-bottom:none;}
-.exp-date{font-family:var(--font-mono);font-size:9px;color:var(--mid);letter-spacing:.05em;line-height:1.5;}
+.exp-date{font-family:var(--font-mono);font-size:12px;color:var(--ink);letter-spacing:.04em;line-height:1.5;font-weight:500;}
 .exp-badge{
-  display:inline-block;margin-top:6px;
-  font-family:var(--font-mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;
+  display:inline-block;margin-top:8px;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--accent);border:1px solid currentColor;
-  padding:2px 7px;border-radius:2px;opacity:.7;transition:color .7s;
+  padding:3px 10px;border-radius:3px;opacity:.85;transition:color .7s;font-weight:500;
 }
 .exp-role{font-size:16px;font-weight:600;margin-bottom:3px;}
-.exp-co{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;color:var(--mid);margin-bottom:10px;}
+.exp-co{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--mid);margin-bottom:10px;}
 .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .exp-bullets li{
   font-size:14px;line-height:1.7;color:var(--mid);
@@ -379,9 +379,9 @@ img.char-img {
 .exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--faint);}
 .exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
 .exp-tag{
-  font-family:var(--font-mono);font-size:7.5px;
+  font-family:var(--font-mono);font-size:10px;
   border:1px solid var(--faint);color:var(--mid);
-  padding:3px 8px;border-radius:2px;
+  padding:4px 10px;border-radius:3px;
 }
 
 /* ══ PROJECTS ══ */
@@ -398,17 +398,17 @@ img.char-img {
 .proj:nth-last-child(-n+2){border-bottom:none;}
 .proj:hover{background:var(--bg2);}
 .proj-type{
-  font-family:var(--font-mono);font-size:8px;letter-spacing:.12em;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--accent);transition:color .7s;
-  display:block;margin-bottom:10px;
+  display:block;margin-bottom:10px;font-weight:500;
 }
 .proj-title{font-size:17px;font-weight:600;margin-bottom:10px;line-height:1.35;}
 .proj-desc{font-size:14px;line-height:1.72;color:var(--mid);margin-bottom:14px;}
 .proj-chips{display:flex;flex-wrap:wrap;gap:5px;}
 .proj-chip{
-  font-family:var(--font-mono);font-size:7px;letter-spacing:.08em;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;
   background:var(--bg2);color:var(--mid);
-  padding:3px 8px;border-radius:2px;transition:background .7s;
+  padding:4px 10px;border-radius:3px;transition:background .7s;
 }
 
 /* ══ EDUCATION ══ */
@@ -418,7 +418,7 @@ img.char-img {
   transition:border-color .7s;
 }
 .edu:last-child{border-bottom:none;}
-.edu-y{font-family:var(--font-mono);font-size:9px;color:var(--mid);letter-spacing:.05em;padding-top:4px;}
+.edu-y{font-family:var(--font-mono);font-size:12px;color:var(--ink);letter-spacing:.04em;padding-top:4px;font-weight:500;}
 .edu-school{font-size:17px;font-weight:600;margin-bottom:4px;}
 .edu-deg{font-size:14px;color:var(--mid);line-height:1.6;}
 .edu-courses{font-family:var(--font-mono);font-size:11px;color:var(--mid);margin-top:6px;line-height:1.7;opacity:.8;}
@@ -463,6 +463,12 @@ img.char-img {
   cursor:none;transition:color .3s;
 }
 .footer-link:hover{color:var(--ink);}
+
+/* ══ Bilingual ══ */
+.bi-en{display:block;font-size:0.85em;color:var(--mid);margin-top:3px;line-height:1.5;font-style:italic;transition:color .7s;}
+.exp-role-en,.edu-deg-en{font-size:0.85em;color:var(--mid);font-style:italic;margin-top:2px;transition:color .7s;}
+.proj-desc-en{font-size:0.88em;color:var(--mid);font-style:italic;margin-top:8px;line-height:1.65;transition:color .7s;}
+.sk-cat-en{font-size:0.8em;color:var(--mid);font-style:italic;margin-top:1px;transition:color .7s;}
 
 /* ══ LIFE — Intro ══ */
 .life-intro{padding:80px 0 48px;}
@@ -747,6 +753,11 @@ img.char-img {
   .int-title{font-size:15px;}
   .int-body{font-size:13px;}
 
+  /* Bilingual */
+  .bi-en{font-size:0.82em;}
+  .exp-role-en,.edu-deg-en{font-size:0.82em;}
+  .proj-desc-en{font-size:0.84em;}
+
   /* Movies */
   .movie{padding:18px 18px;}
   .movie-title{font-size:14px;}
@@ -904,8 +915,8 @@ body.life .contact-item{border-color:var(--faint);}
 
         <!-- PRO text -->
         <div id="heroPro">
-          <p class="hero-intro">Hi, I'm <strong>Henri Xie (谢子恒)</strong> — from strategy consulting to <strong>AI & product</strong>, based between <strong>Paris</strong> and <strong>Shanghai</strong>.</p>
-          <p class="hero-sub" style="margin-top:10px;">Experience in <b>strategy consulting</b>, <b>government affairs</b> & <b>pharma advisory</b>. Currently seeking opportunities in <b>AI & Product</b>.</p>
+          <p class="hero-intro">Hi, I'm <strong>Henri Xie 谢子恒</strong> — a cross-disciplinary thinker who connects <strong>strategy</strong>, <strong>tech</strong>, and <strong>business</strong>, based between <strong>France</strong> 🇫🇷 and <strong>Shanghai</strong> 🇨🇳.</p>
+          <p class="hero-sub" style="margin-top:10px;">Background in <b>consulting</b>, <b>data</b> & <b>market analysis</b>. Excited about roles where I can <b>build things that matter</b>.</p>
           <div class="hero-btns" style="margin-top:26px;">
             <a class="btn-p" href="#experience">View My Experience ↓</a>
             <a class="btn-s" href="#" onclick="openContact(event)">Get In Touch</a>
@@ -943,7 +954,7 @@ body.life .contact-item{border-color:var(--faint);}
 
   <section class="section" id="education">
     <div class="container">
-      <div class="sec-label"><span class="sec-n">01</span><h2 class="sec-t">Education</h2></div>
+      <div class="sec-label"><span class="sec-n">01</span><h2 class="sec-t">Education · 教育背景</h2></div>
 
       <div class="edu">
         <div class="edu-y">2025.09 — 2027.10</div>
@@ -951,7 +962,9 @@ body.life .contact-item{border-color:var(--faint);}
           <img class="edu-logo" src="logos/emlyon_business_school_logo.jpeg" alt="emlyon">
           <div class="edu-school">法国里昂商学院（Emlyon Business School）</div>
           <div class="edu-deg">硕士 · 管理学（MSc in Management - Grande Ecole）</div>
+          <div class="edu-deg-en">Master's · Management · Grande Ecole Program</div>
           <div class="edu-deg">全额奖学金 · 3+2 双学位项目 · 法国·里昂</div>
+          <div class="edu-deg-en">Full Scholarship · 3+2 Dual Degree · Lyon, France</div>
           <div class="edu-courses">Corporate Finance · Business Statistics · Entrepreneurship Project (PCE)</div>
         </div>
       </div>
@@ -960,10 +973,13 @@ body.life .contact-item{border-color:var(--faint);}
         <div class="edu-y">2022.09 — 2026.06</div>
         <div>
           <img class="edu-logo" src="logos/Tongji.jpeg" alt="Tongji">
-          <div class="edu-school">同济大学</div>
+          <div class="edu-school">同济大学（Tongji University）</div>
           <div class="edu-deg">本科 · 工商管理 · GPA 4.40/5.00（88.49/100）</div>
+          <div class="edu-deg-en">B.A. in Business Administration</div>
           <div class="edu-deg">校级奖学金（2023–2025）· 上海</div>
+          <div class="edu-deg-en">University Scholarship (2023–2025) · Shanghai</div>
           <div class="edu-courses">宏微观经济学 · 中级财务会计 · 项目管理（英）· 管理信息系统（英）</div>
+          <div class="edu-courses" style="margin-top:2px;font-style:italic;color:var(--mid);">Macro & Micro Economics · Intermediate Accounting · Project Management · MIS</div>
         </div>
       </div>
 
@@ -972,8 +988,8 @@ body.life .contact-item{border-color:var(--faint);}
         <div>
           <img class="edu-logo" src="logos/peking_university_logo.jpeg" alt="PKU">
           <div class="edu-school">北京大学（Peking University）</div>
-          <div class="edu-deg">Summer School · Contemporary Literature</div>
-          <div class="edu-deg">成绩: 97/100</div>
+          <div class="edu-deg">暑期学校 · 当代文学（Summer School · Contemporary Literature）</div>
+          <div class="edu-deg">成绩 Score: 97/100</div>
         </div>
       </div>
     </div>
@@ -981,25 +997,26 @@ body.life .contact-item{border-color:var(--faint);}
 
   <section class="section" id="experience">
     <div class="container">
-      <div class="sec-label"><span class="sec-n">02</span><h2 class="sec-t">Experience</h2></div>
+      <div class="sec-label"><span class="sec-n">02</span><h2 class="sec-t">Experience · 工作经历</h2></div>
 
       <div class="exp">
         <div>
           <div class="exp-date">2025.03 — 2025.09</div>
-          <div class="exp-badge">实习</div>
+          <div class="exp-badge">实习 Intern</div>
         </div>
         <div>
           <img class="exp-logo" src="logos/boston_consulting_group_logo.jpeg" alt="BCG">
           <div class="exp-role">咨询实习生（PTA）</div>
-          <div class="exp-co">波士顿咨询公司（BCG）· 上海</div>
+          <div class="exp-role-en">Consulting Intern (Part-Time Associate)</div>
+          <div class="exp-co">波士顿咨询公司（BCG）· 上海 Shanghai</div>
           <ul class="exp-bullets">
-            <li>行业研究：对 200+ 工业细分行业进行扫描筛选，对 10+ 下游市场（医疗器械、消费电子等）开展深度研究，搭建市场规模与竞争格局分析框架，输出 40+ 页行业研究报告</li>
-            <li>并购尽调：主导 5 家先进制造业目标公司并购前尽调，分析盈利结构、客户集中度与供应链依赖风险，输出 50+ 页评估报告，支撑收购方估值与交易决策</li>
-            <li>定价策略：支持高端烈酒头部企业定价体系重塑，构建覆盖"出厂—经销—终端"的定价分析框架，提出本土化价格管控方案</li>
-            <li>市场测算：为拟进入中国市场的户外鞋服品牌测算目标市场规模，基于供给侧逻辑搭建 Excel 模型，通过 20+ 头部品牌销售数据倒推细分赛道规模</li>
+            <li>行业研究：对 200+ 工业细分行业进行扫描筛选，对 10+ 下游市场（医疗器械、消费电子等）开展深度研究，搭建市场规模与竞争格局分析框架，输出 40+ 页行业研究报告<span class="bi-en">Industry Research: Scanned 200+ industrial sub-sectors, conducted in-depth research on 10+ downstream markets, built market sizing & competitive landscape frameworks, delivering 40+ page reports.</span></li>
+            <li>并购尽调：主导 5 家先进制造业目标公司并购前尽调，分析盈利结构、客户集中度与供应链依赖风险，输出 50+ 页评估报告，支撑收购方估值与交易决策<span class="bi-en">M&A Due Diligence: Led pre-acquisition DD on 5 advanced manufacturing targets, analyzing profitability, customer concentration & supply chain risks, delivering 50+ page assessment reports.</span></li>
+            <li>定价策略：支持高端烈酒头部企业定价体系重塑，构建覆盖"出厂—经销—终端"的定价分析框架，提出本土化价格管控方案<span class="bi-en">Pricing Strategy: Supported premium spirits brand's pricing overhaul, building a factory-to-distributor-to-retail pricing framework with localized price control recommendations.</span></li>
+            <li>市场测算：为拟进入中国市场的户外鞋服品牌测算目标市场规模，基于供给侧逻辑搭建 Excel 模型，通过 20+ 头部品牌销售数据倒推细分赛道规模<span class="bi-en">Market Sizing: Estimated TAM for an outdoor apparel brand entering China, building supply-side Excel models using 20+ leading brands' sales data.</span></li>
           </ul>
           <div class="exp-tags">
-            <span class="exp-tag">战略咨询</span><span class="exp-tag">行业研究</span><span class="exp-tag">并购尽调</span><span class="exp-tag">市场测算</span><span class="exp-tag">Excel</span>
+            <span class="exp-tag">战略咨询 Strategy</span><span class="exp-tag">行业研究 Research</span><span class="exp-tag">并购尽调 M&A DD</span><span class="exp-tag">市场测算 Sizing</span><span class="exp-tag">Excel</span>
           </div>
         </div>
       </div>
@@ -1007,18 +1024,19 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="exp">
         <div>
           <div class="exp-date">2024.10 — 2025.03</div>
-          <div class="exp-badge">实习</div>
+          <div class="exp-badge">实习 Intern</div>
         </div>
         <div>
           <img class="exp-logo" src="logos/EUCCC.jpeg" alt="EUCCC">
           <div class="exp-role">实习生（政府事务、能源与知识产权）</div>
-          <div class="exp-co">中国欧盟商会（EUCCC）· 上海</div>
+          <div class="exp-role-en">Intern, Government Affairs, Energy & IP</div>
+          <div class="exp-co">中国欧盟商会（EUCCC）· 上海 Shanghai</div>
           <ul class="exp-bullets">
-            <li>跟踪中欧贸易政策动态，梳理长三角地区产业政策与商业环境差异，支持商会为外资企业提供在华投资环境分析</li>
-            <li>协助组织 10+ 场跨行业工作组会议，对接政府部门及医药、环境等行业代表，汇总 200+ 页会议纪要与政策材料，为商会政策建议书撰写提供支持</li>
+            <li>跟踪中欧贸易政策动态，梳理长三角地区产业政策与商业环境差异，支持商会为外资企业提供在华投资环境分析<span class="bi-en">Tracked China-EU trade policy developments, analyzed Yangtze Delta industrial policies & business environment, supporting investment climate analysis for foreign enterprises.</span></li>
+            <li>协助组织 10+ 场跨行业工作组会议，对接政府部门及医药、环境等行业代表，汇总 200+ 页会议纪要与政策材料，为商会政策建议书撰写提供支持<span class="bi-en">Co-organized 10+ cross-industry working group meetings, liaising with government agencies & industry representatives, compiling 200+ pages of minutes & policy materials for position papers.</span></li>
           </ul>
           <div class="exp-tags">
-            <span class="exp-tag">政府事务</span><span class="exp-tag">政策研究</span><span class="exp-tag">对外关系</span>
+            <span class="exp-tag">政府事务 Gov Affairs</span><span class="exp-tag">政策研究 Policy</span><span class="exp-tag">对外关系 External Relations</span>
           </div>
         </div>
       </div>
@@ -1026,19 +1044,20 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="exp">
         <div>
           <div class="exp-date">2023.06 — 2023.09</div>
-          <div class="exp-badge">实习</div>
+          <div class="exp-badge">实习 Intern</div>
         </div>
         <div>
           <img class="exp-logo" src="logos/Benhealth.jpeg" alt="Benhealth">
           <div class="exp-role">医药咨询实习生</div>
-          <div class="exp-co">Benhealth Consulting · 上海</div>
+          <div class="exp-role-en">Pharma Consulting Intern</div>
+          <div class="exp-co">Benhealth Consulting · 上海 Shanghai</div>
           <ul class="exp-bullets">
-            <li>主导 RSV 疫苗及预防性单抗市场全流程竞品分析，系统对标 10+ 条全球在研管线，竞品报告被客户直接采纳为市场准入决策核心依据</li>
-            <li>独立开展 5+ 场深度专家访谈，覆盖一线临床专家及药企高管，挖掘未满足临床需求与诊疗路径痛点</li>
-            <li>利用爬虫工具结合 AI 辅助批量抓取并清洗 600+ 份三甲医院数据，支撑疾病谱及市场渗透率分析</li>
+            <li>主导 RSV 疫苗及预防性单抗市场全流程竞品分析，系统对标 10+ 条全球在研管线，竞品报告被客户直接采纳为市场准入决策核心依据<span class="bi-en">Led end-to-end competitive analysis of RSV vaccines & prophylactic mAbs, benchmarking 10+ global pipelines; report directly adopted as core reference for client's market access decisions.</span></li>
+            <li>独立开展 5+ 场深度专家访谈，覆盖一线临床专家及药企高管，挖掘未满足临床需求与诊疗路径痛点<span class="bi-en">Independently conducted 5+ in-depth KOL interviews with clinicians & pharma executives, uncovering unmet clinical needs & treatment pathway pain points.</span></li>
+            <li>利用爬虫工具结合 AI 辅助批量抓取并清洗 600+ 份三甲医院数据，支撑疾病谱及市场渗透率分析<span class="bi-en">Leveraged web scraping tools with AI to batch-collect and clean 600+ tertiary hospital datasets, supporting disease spectrum & market penetration analysis.</span></li>
           </ul>
           <div class="exp-tags">
-            <span class="exp-tag">医药咨询</span><span class="exp-tag">竞品分析</span><span class="exp-tag">专家访谈</span><span class="exp-tag">数据清洗</span>
+            <span class="exp-tag">医药咨询 Pharma</span><span class="exp-tag">竞品分析 Competitive Intel</span><span class="exp-tag">专家访谈 KOL Interview</span><span class="exp-tag">数据清洗 Data Cleaning</span>
           </div>
         </div>
       </div>
@@ -1047,52 +1066,93 @@ body.life .contact-item{border-color:var(--faint);}
 
   <section class="section" id="projects">
     <div class="container">
-      <div class="sec-label"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
+      <div class="sec-label"><span class="sec-n">03</span><h2 class="sec-t">Projects · 项目经历</h2></div>
       <div class="proj-grid">
         <div class="proj">
-          <span class="proj-type">AI · 量化研究</span>
+          <span class="proj-type">AI · 量化研究 Quantitative Research</span>
           <h3 class="proj-title">基于 LLM 多智能体的 AI 量化交易研究</h3>
           <p class="proj-desc">复现并本地化开源框架 TradingAgents，构建模拟投研团队的多 Agent 系统，涵盖基本面分析、技术面分析、风险控制及交易决策等角色；引入 A 股市场数据源（沪深股票），对比单 Agent 与多 Agent 决策结果，验证多空辩论机制对交易信号稳定性的提升效果。</p>
+          <p class="proj-desc-en">LLM Multi-Agent AI Quantitative Trading Research — Reproduced and localized the TradingAgents framework, building a multi-agent system simulating an investment research team (fundamental analysis, technical analysis, risk control, trade execution). Integrated A-share market data to compare single-agent vs. multi-agent decisions, validating how bull-bear debate mechanisms improve signal stability.</p>
           <div class="proj-chips">
-            <span class="proj-chip">LLM</span><span class="proj-chip">Multi-Agent</span><span class="proj-chip">Python</span><span class="proj-chip">A股量化</span>
+            <span class="proj-chip">LLM</span><span class="proj-chip">Multi-Agent</span><span class="proj-chip">Python</span><span class="proj-chip">A股量化 A-share Quant</span>
+          </div>
+        </div>
+        <div class="proj">
+          <span class="proj-type">学术研究 Academic Research</span>
+          <h3 class="proj-title">中国健康与养老追踪调查（CHARLS）</h3>
+          <p class="proj-desc">基于 CHARLS 全国追踪数据，开展中国中老年群体健康与养老状况的实证研究，运用统计分析方法探索影响养老质量的关键因素。</p>
+          <p class="proj-desc-en">China Health and Retirement Longitudinal Study (CHARLS) — Conducted empirical research on health and retirement status of China's middle-aged and elderly population using CHARLS national panel data, applying statistical methods to explore key factors affecting retirement quality.</p>
+          <div class="proj-chips">
+            <span class="proj-chip">CHARLS</span><span class="proj-chip">统计分析 Statistics</span><span class="proj-chip">实证研究 Empirical</span>
+          </div>
+        </div>
+        <div class="proj">
+          <span class="proj-type">竞赛 Competition · 2023.07 — 2023.11</span>
+          <h3 class="proj-title">第十三届上海市大学生工程实践与创新能力大赛</h3>
+          <p class="proj-desc">企业运营赛道：通过供应链管理和财务分析，利用跨学科知识解决复杂经营问题，获得市一等奖。</p>
+          <p class="proj-desc-en">13th Shanghai College Student Engineering Practice & Innovation Competition — Enterprise Operations Track: Solved complex business problems through supply chain management and financial analysis with interdisciplinary knowledge. Awarded Shanghai Municipal First Prize.</p>
+          <div class="proj-chips">
+            <span class="proj-chip">供应链 Supply Chain</span><span class="proj-chip">财务分析 Financial Analysis</span><span class="proj-chip">市一等奖 1st Prize</span>
           </div>
         </div>
         <div class="proj" style="opacity:.45;">
-          <span class="proj-type">Coming Soon</span>
-          <h3 class="proj-title">下一个项目</h3>
-          <p class="proj-desc">正在进行中，敬请期待。</p>
+          <span class="proj-type">Coming Soon · 敬请期待</span>
+          <h3 class="proj-title">下一个项目 Next Project</h3>
+          <p class="proj-desc">正在进行中，敬请期待。 Stay tuned.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="skills" style="padding-bottom:0;">
+  <section class="section" id="skills">
     <div class="container">
-      <div class="sec-label"><span class="sec-n">04</span><h2 class="sec-t">Skills</h2></div>
+      <div class="sec-label"><span class="sec-n">04</span><h2 class="sec-t">Skills · 技能</h2></div>
       <div class="skills-grid">
         <div class="sk">
-          <div class="sk-cat">语言</div>
+          <div class="sk-cat">语言 Languages</div>
           <div class="sk-tags">
-            <span class="sk-tag">中文（母语）</span><span class="sk-tag">上海话（母语）</span><span class="sk-tag">英语（雅思 7.5）</span><span class="sk-tag">法语（TCF B2）</span>
+            <span class="sk-tag">中文 Chinese（母语 Native）</span><span class="sk-tag">上海话 Shanghainese（母语 Native）</span><span class="sk-tag">英语 English（IELTS 7.5）</span><span class="sk-tag">法语 French（TCF B2）</span>
           </div>
         </div>
         <div class="sk">
-          <div class="sk-cat">工具 & 数据</div>
+          <div class="sk-cat">工具 & 数据 Tools & Data</div>
           <div class="sk-tags">
             <span class="sk-tag">Excel（Expert）</span><span class="sk-tag">PowerPoint / Thinkcell</span><span class="sk-tag">Word / Outlook</span><span class="sk-tag">Python（Basic）</span><span class="sk-tag">SQL（Basic）</span>
           </div>
         </div>
         <div class="sk">
-          <div class="sk-cat">证书</div>
+          <div class="sk-cat">证书 Certifications</div>
           <div class="sk-tags">
             <span class="sk-tag">Tosa Excel Microsoft 365（Expert）</span><span class="sk-tag">Bloomberg Market Concepts</span>
           </div>
         </div>
         <div class="sk">
-          <div class="sk-cat">专业能力</div>
+          <div class="sk-cat">专业能力 Professional Skills</div>
           <div class="sk-tags">
-            <span class="sk-tag">行业研究</span><span class="sk-tag">市场分析</span><span class="sk-tag">并购尽调</span><span class="sk-tag">竞品分析</span><span class="sk-tag">数据建模</span><span class="sk-tag">Expert访谈</span>
+            <span class="sk-tag">行业研究 Industry Research</span><span class="sk-tag">市场分析 Market Analysis</span><span class="sk-tag">并购尽调 M&A DD</span><span class="sk-tag">竞品分析 Competitive Intel</span><span class="sk-tag">数据建模 Data Modeling</span><span class="sk-tag">Expert访谈 KOL Interview</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="volunteer" style="padding-bottom:0;">
+    <div class="container">
+      <div class="sec-label"><span class="sec-n">05</span><h2 class="sec-t">Volunteer · 志愿者</h2></div>
+
+      <div class="exp">
+        <div>
+          <div class="exp-date">2025.09 — 至今 Present</div>
+          <div class="exp-badge">Member</div>
+        </div>
+        <div>
+          <img class="exp-logo" src="logos/emlyon_business_school_logo.jpeg" alt="NOISE emlyon">
+          <div class="exp-role">NOISE emlyon</div>
+          <div class="exp-role-en">Food Aid & Community Organization</div>
+          <div class="exp-co">Emlyon Business School · 里昂 Lyon</div>
+          <ul class="exp-bullets">
+            <li>协助收集和分发食物，参与组织活动，并撰写专栏文章，帮助学生获取新鲜、实惠的食品。<span class="bi-en">Assisted in collecting and distributing food, participated in organizational activities, and wrote columns to help students access fresh, affordable food.</span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1102,9 +1162,9 @@ body.life .contact-item{border-color:var(--faint);}
     <div class="footer">
       <span class="footer-q">Let's build something.</span>
       <div class="footer-links">
-        <a class="footer-link" href="mailto:zihengxie2004@outlook.com">Email</a>
-        <a class="footer-link" href="#">LinkedIn</a>
-        <a class="footer-link" href="#">WeChat</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">Email</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">LinkedIn</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">WeChat</a>
       </div>
     </div>
   </div>
@@ -1121,7 +1181,7 @@ body.life .contact-item{border-color:var(--faint);}
       <div class="map-tooltip" id="mapTooltip"></div>
       <div id="mapContainer"></div>
       <div class="map-stats">
-        <div><div class="map-stat-n">22</div><div class="map-stat-label">Countries & Regions</div></div>
+        <div><div class="map-stat-n">24</div><div class="map-stat-label">Countries / Regions</div></div>
         <div><div class="map-stat-n">4</div><div class="map-stat-label">Continents</div></div>
         <div><div class="map-stat-n">∞</div><div class="map-stat-label">Memories</div></div>
       </div>
@@ -1367,9 +1427,9 @@ body.life .contact-item{border-color:var(--faint);}
     <div class="footer">
       <span class="footer-q">Let's grab a coffee.</span>
       <div class="footer-links">
-        <a class="footer-link" href="mailto:zihengxie2004@outlook.com">Email</a>
-        <a class="footer-link" href="#">Instagram</a>
-        <a class="footer-link" href="#">Douban</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">Email</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">Instagram</a>
+        <a class="footer-link" href="#" onclick="openContact(event)">Douban</a>
       </div>
     </div>
   </div>
@@ -1388,7 +1448,8 @@ body.life .contact-item{border-color:var(--faint);}
     'Norway':'2025','Sweden':'2025','Denmark':'2025','Netherlands':'2025',
     'Germany':'2025','Poland':'2025','France':'2022','Spain':'2025',
     'Portugal':'2025','Italy':'2025','Belgium':'2025',
-    'Switzerland':'2025'
+    'Switzerland':'2025',
+    'Thailand':'2018','Russia':'2017'
   };
   const NAME_MAP = {
     'Korea':'South Korea','Rep. Korea':'South Korea','S. Korea':'South Korea',
@@ -1545,7 +1606,7 @@ function switchChar(isLife) {
 // ── Bubbles ──
 let mode = 'pro';
 const BUBBLES = {
-  pro:  ['💼 Open to collaborate!','📊 Seeking AI & Product roles','🚀 Always building something new'],
+  pro:  ['💼 Open to opportunities!','🧩 Love solving hard problems','🚀 Always building something new'],
   life: ['☕ Always finding great coffee','📚 Currently reading 3 books','✨ Curious about everything']
 };
 let bIdx = 0, bTimer;
